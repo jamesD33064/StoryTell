@@ -1,0 +1,102 @@
+Sentence|Happy|Angry|Surprise|Sad|Fear|Neutral
+Once upon a time there was a sweet little girl.|0.0|0.0|1.0|0.0|0.0|0
+Everyone who saw her liked her
+Once she gave her a little cap made of red velvet.|0|0|0|0|0|1
+Because it suited her so well
+One day her mother said to her: Come Little Red Riding Hood.|0.5|0.5|0.0|0.0|0.0|0
+Here is a piece of cake and a bottle of wine.|0|0|0|0|0|1
+Take them to your grandmother.|0|0|0|0|0|1
+She is sick and weak
+Mind your manners and give her my greetings.|0.0|0.0|0.5|0.0|0.5|0
+Behave yourself on the way
+Little Red Riding Hood promised to obey her mother.|0.0|0.5|0.0|0.5|0.0|0
+The grandmother lived out in the woods
+When Little Red Riding Hood entered the woods a wolf came up to her.|0.0|0.5|0.0|0.0|0.5|0
+She did not know what a wicked animal he was
+Good day to you
+#NAME?
+#NAME?
+- To grandmother's.|0|0|0|0|0|1
+- And what are you carrying under your apron?|0|0|0|0|0|1
+#NAME?
+We baked yesterday
+#NAME?
+#NAME?
+There's a hedge of hazel bushes there.|0.0|0.0|0.0|0.0|1.0|0
+You must know the place
+The wolf thought to himself: Now there is a tasty bite for me.|0|0|0|0|0|1
+Just how are you going to catch her?|0|0|0|0|0|1
+Then he said: Listen
+Why don't you go and take a look?|0|0|0|0|0|1
+And I don't believe you can hear how beautifully the birds are singing.|0.0|1.0|0.0|0.0|0.0|0
+You are walking along as though you were on your way to school in the village.|0|0|0|0|0|1
+It is very beautiful in the woods.|0.5|0.0|0.0|0.0|0.5|0
+Little Red Riding Hood opened her eyes and saw the sunlight breaking through the trees and how the ground was covered with beautiful flowers.|0|0|0|0|0|1
+She thought: If a take a bouquet to grandmother
+Anyway
+And she ran off into the woods looking for flowers.|0.0|0.0|0.0|0.0|1.0|0
+Each time she picked one she thought that she could see an even more beautiful one a little way off
+But the wolf ran straight to the grandmother's house and knocked on the door.|0|0|0|0|0|1
+Who's there?|0|0|0|0|0|1
+- Little Red Riding Hood.|0.0|1.0|0.0|0.0|0.0|0
+I'm bringing you some cake and wine.|0.0|0.0|0.0|1.0|0.0|0
+Open the door for me.|0.0|0.0|0.0|0.0|1.0|0
+#NAME?
+I'm too weak to get up.|0.0|0.0|0.0|1.0|0.0|0
+The wolf pressed the latch
+He stepped inside
+Then he took her clothes
+He got into her bed and pulled the curtains shut.|0.0|1.0|0.0|0.0|0.0|0
+Little Red Riding Hood had run after flowers
+When she arrived
+She walked into the parlor
+I usually like it at grandmother's.|0|0|0|0|0|1
+Then she went to the bed and pulled back the curtains.|0|0|0|0|0|1
+Grandmother was lying there with her cap pulled down over her face and looking very strange.|0|0|0|0|0|1
+Oh
+- All the better to hear you with.|0|0|0|0|0|1
+#NAME?
+- All the better to see you with.|0|0|0|0|0|1
+#NAME?
+- All the better to grab you with.|0|0|0|0|0|1
+#NAME?
+- All the better to eat you with.|0.0|0.0|0.0|0.0|1.0|0
+And with that he jumped out of bed
+As soon as the wolf had finished this tasty bite
+A huntsman was just passing by.|0|0|0|0|0|1
+He thought it strange that the old woman was snoring so loudly
+He stepped inside
+He has eaten the grandmother
+I won't shoot him
+So he took a pair of scissors and cut open his belly.|0.0|0.0|0.0|0.0|1.0|0
+He had cut only a few strokes when he saw the red cap shining through.|0.0|1.0|0.0|0.0|0.0|0
+He cut a little more
+It was so dark inside the wolf's body.|0.0|0.0|0.0|1.0|0.0|0
+And then the grandmother came out alive as well.|0|0|0|0|0|1
+Then Little Red Riding Hood fetched some large heavy stones.|0|0|0|0|0|1
+They filled the wolf's body with them
+The three of them were happy.|1.0|0.0|0.0|0.0|0.0|0
+The huntsman took the wolf's pelt.|0.0|1.0|0.0|0.0|0.0|0
+The grandmother ate the cake and drank the wine that Little Red Riding Hood had brought.|0|0|0|0|0|1
+And Little Red Riding Hood thought to herself: As long as I live
+They also tell how Little Red Riding Hood was taking some baked things to her grandmother another time
+But Little Red Riding Hood took care and went straight to grandmother's.|0.0|1.0|0.0|0.0|0.0|0
+She told her that she had seen the wolf
+If we hadn't been on a public road
+Come
+Let's lock the door
+Soon afterward the wolf knocked on the door and called out: Open up
+It's Little Red Riding Hood
+They remained silent
+The wicked one walked around the house several times
+He wanted to wait until Little Red Riding Hood went home that evening
+But the grandmother saw what he was up to.|0|0|0|0|0|1
+There was a large stone trough in front of the house.|0.0|0.0|0.5|0.5|0.0|0
+Fetch a bucket
+Yesterday I cooked some sausage.|0|0|0|0|0|1
+Carry the water that I boiled them with to the trough.|0.0|0.0|0.0|1.0|0.0|0
+Little Red Riding Hood carried water until the large
+The smell of sausage arose into the wolf's nose.|0.0|0.0|0.0|0.0|1.0|0
+He sniffed and looked down
+He slid off the roof
+And Little Red Riding Hood returned home happily and safely.|0|0|0|0|0|1

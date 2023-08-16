@@ -23,7 +23,6 @@ export default function Home() {
         {/* 最外層snap */} 
         <div
           className="snap-mandatory snap-y overflow-y-auto h-screen"
-          style={{background: `url('/bg.jpg') center/cover no-repeat fixed`,}}
           >
           {/* snap page1 */}
           <div className='snap-start h-full'>

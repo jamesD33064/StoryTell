@@ -1,25 +1,20 @@
 "use client";
-
-import React from "react";
-// import useSWR from "swr";
-// import axios from "axios";
-
-// interface story {
-//   _id: string;
-//   storyName: string;
-// }
-
-// const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function Library() {
-  // const { data, error, isLoading } = useSWR(
-  //   "http://140.134.37.23:8000/story/getStoryDetail/64ce58ed2f6ef1ad74002243",
-  //   fetcher
-  // );
+  const [stories, setStories] = useState([]);
 
-  // if (error) return <div>Failed to load</div>
-  // if (!data) return <div>Loading...</div>
-  // if (isLoading) return <div>Loading...</div>
+  useEffect(() => {
+    axios
+      .get("http://140.134.37.23:8000/story/getAllStoryInfo")
+      .then((response) => {
+        setStories(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching stories:", error);
+      });
+  }, []);
 
   return (
     <>
@@ -44,15 +39,14 @@ export default function Library() {
         </div>
       </div>
       <div>
-        這裡要接http://140.134.37.23:8000/story/getAllStoryInfo顯示所有故事目錄
-        {/* {data && <>{data['storyName']}</>}
-      {data.map((todo: story) => (
-        <div key={todo.id}>
-          <p>
-            {todo._id} : {todo.storyName}
-          </p>
+        這裡要接http://140.134.37.23:8000/story/getAllStoryInfo 顯示所有故事目錄
+        <div className="w-full flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
+          {stories.map((story) => (
+            <div key={story._id} className="snap-center w-3/5 shrink-0">
+              <img src={story.storyName} alt={`Story ${story.storyName}`} />
+            </div>
+          ))}
         </div>
-      ))} */}
       </div>
     </>
   );

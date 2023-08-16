@@ -13,7 +13,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body
+      style={{background: `url('/bg.jpg') center/cover no-repeat fixed`,}}
+      >
         {/* <Navbar /> */}
         {children}
       </body>

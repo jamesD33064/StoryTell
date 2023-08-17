@@ -2,15 +2,19 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Library() {
-  const [stories, setStories] = useState([]);
+interface StoryInfo {
+  _id: string;
+  storyName: string;
+}
 
+export default function Library() {
+  const [stories, setStories] = useState<StoryInfo[]>([]);
   useEffect(() => {
     axios
       .get("http://140.134.37.23:8000/story/getAllStoryInfo")
       .then((response) => {
         setStories(response.data);
-        console.log(response.data)
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching stories:", error);

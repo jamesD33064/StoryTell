@@ -2,6 +2,7 @@
   "name": "storytell",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://140.134.37.23:8000",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

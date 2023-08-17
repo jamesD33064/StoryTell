@@ -2,17 +2,22 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function Library() {
-  const [stories, setStories] = useState([]);
+interface StoryInfo {
+  _id: string;
+  storyName: string;
+}
 
+export default function Library() {
+  const [stories, setStories] = useState<StoryInfo[]>([]);
   useEffect(() => {
     axios
-      .get("http://140.134.37.23:8000/story/getAllStoryInfo")
+      .get('/api-proxy/story/getAllStoryInfo') // 使用代理路径
       .then((response) => {
         setStories(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching stories:", error);
+        console.error('Error fetching stories:', error);
       });
   }, []);
 
@@ -43,7 +48,7 @@ export default function Library() {
         <div className="w-full flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
           {stories.map((story) => (
             <div key={story._id} className="snap-center w-3/5 shrink-0">
-              <img src={story.storyName} alt={`Story ${story.storyName}`} />
+              <h1>{story.storyName}</h1>
             </div>
           ))}
         </div>

@@ -11,13 +11,13 @@ export default function Library() {
   const [stories, setStories] = useState<StoryInfo[]>([]);
   useEffect(() => {
     axios
-      .get("http://140.134.37.23:8000/story/getAllStoryInfo")
+      .get('/api-proxy/story/getAllStoryInfo') // 使用代理路径
       .then((response) => {
         setStories(response.data);
         console.log(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching stories:", error);
+        console.error('Error fetching stories:', error);
       });
   }, []);
 

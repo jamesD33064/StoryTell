@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import LibraryCard from "@/components/LibraryCard/page";
 
 interface StoryInfo {
   _id: string;
@@ -11,13 +12,13 @@ export default function Library() {
   const [stories, setStories] = useState<StoryInfo[]>([]);
   useEffect(() => {
     axios
-      .get('/api-proxy/story/getAllStoryInfo') // 使用代理路径
+      .get("http://140.134.37.23:8000/story/getAllStoryInfo") // 使用代理路径
       .then((response) => {
         setStories(response.data);
         console.log(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching stories:', error);
+        console.error("Error fetching stories:", error);
       });
   }, []);
 
@@ -25,31 +26,48 @@ export default function Library() {
     <>
       <div className="w-full flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
         <div className="snap-center w-3/5 shrink-0">
-          <img src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+          <LibraryCard
+            id="1"
+            storyName="Cinderella"
+            storyImg="http://140.134.37.23:8000/img/Cinderella.jpg"
+            showTag={false}
+            link=""
+          ></LibraryCard>
         </div>
         <div className="snap-center w-3/5 shrink-0">
-          <img src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-        </div>
-        <div className="snap-center w-3/5 shrink-0">
-          <img src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-        </div>
-        <div className="snap-center w-3/5 shrink-0">
-          <img src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-        </div>
-        <div className="snap-center w-3/5 shrink-0">
-          <img src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
-        </div>
-        <div className="snap-center w-3/5 shrink-0">
-          <img src="https://images.unsplash.com/photo-1540206351-d6465b3ac5c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=320&h=160&q=80" />
+          <LibraryCard
+            id="1"
+            storyName="Little Red Riding Hood"
+            storyImg="http://140.134.37.23:8000/img/LittleRedRidingHood.png"
+            showTag={false}
+            link=""
+          ></LibraryCard>
         </div>
       </div>
       <div>
-        這裡要接http://140.134.37.23:8000/story/getAllStoryInfo 顯示所有故事目錄
-        <div className="w-full flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
+        <div className="w-full flex flex-col gap-8 snap-mandatory snap-x overflow-x-auto p-14">
+          <LibraryCard
+            id="demo-1"
+            storyName="Little Red Riding Hood"
+            storyImg="http://140.134.37.23:8000/img/LittleRedRidingHood.png"
+            showTag={true}
+            link=""
+          ></LibraryCard>
+          <LibraryCard
+            id="demo-2"
+            storyName="conderella"
+            storyImg="http://140.134.37.23:8000/img/Cinderella.jpg"
+            showTag={true}
+            link=""
+          ></LibraryCard>
           {stories.map((story) => (
-            <div key={story._id} className="snap-center w-3/5 shrink-0">
-              <h1>{story.storyName}</h1>
-            </div>
+            <LibraryCard
+              id={story._id}
+              storyName={story.storyName}
+              storyImg="http://140.134.37.23:8000/img/LittleRedRidingHood.png"
+              showTag={true}
+              link=""
+            ></LibraryCard>
           ))}
         </div>
       </div>

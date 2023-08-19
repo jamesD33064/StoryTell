@@ -24,8 +24,8 @@ export default function Library() {
 
   return (
     <>
-      <div className="w-full flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
-        <div className="snap-center w-3/5 shrink-0">
+      <div className="w-full h-1/5 flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
+        <div className="snap-center w-3/5 h-full shrink-0">
           <LibraryCard
             id="1"
             storyName="Cinderella"
@@ -34,7 +34,7 @@ export default function Library() {
             link=""
           ></LibraryCard>
         </div>
-        <div className="snap-center w-3/5 shrink-0">
+        <div className="snap-center w-3/5 h-full shrink-0">
           <LibraryCard
             id="1"
             storyName="Little Red Riding Hood"
@@ -45,7 +45,7 @@ export default function Library() {
         </div>
       </div>
       <div>
-        <div className="w-full flex flex-col gap-8 snap-mandatory snap-x overflow-x-auto p-14">
+        <div className="w-full flex flex-col align-middle justify-center gap-8 p-14">
           <LibraryCard
             id="demo-1"
             storyName="Little Red Riding Hood"
@@ -60,8 +60,9 @@ export default function Library() {
             showTag={true}
             link=""
           ></LibraryCard>
-          {stories.map((story) => (
+          {stories.map((story, index) => (
             <LibraryCard
+              key={index}
               id={story._id}
               storyName={story.storyName}
               storyImg="http://140.134.37.23:8000/img/LittleRedRidingHood.png"

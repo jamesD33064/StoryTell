@@ -45,7 +45,7 @@ export default function Library() {
         </div>
       </div>
       <div>
-        <div className="w-full flex flex-col gap-8 snap-mandatory snap-x overflow-x-auto p-14">
+        <div className="w-full flex flex-col align-middle justify-center gap-8 p-14">
           <LibraryCard
             id="demo-1"
             storyName="Little Red Riding Hood"

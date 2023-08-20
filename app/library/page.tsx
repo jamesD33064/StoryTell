@@ -60,8 +60,9 @@ export default function Library() {
             showTag={true}
             link=""
           ></LibraryCard>
-          {stories.map((story) => (
+          {stories.map((story, index) => (
             <LibraryCard
+              key={index}
               id={story._id}
               storyName={story.storyName}
               storyImg="http://140.134.37.23:8000/img/LittleRedRidingHood.png"

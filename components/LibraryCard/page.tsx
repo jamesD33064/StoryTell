@@ -13,7 +13,7 @@ interface LibraryCardProps {
 export default function LibraryCard(props: LibraryCardProps) {
   return (
     <>
-      <div id={props.id} className="rounded overflow-hidden shadow-lg">
+      <div id={props.id} className="rounded-lg overflow-hidden shadow-lg">
         <div className="w-full h-auto aspect-square overflow-hidden">
           <img
             src={props.storyImg}

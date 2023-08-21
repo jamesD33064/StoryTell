@@ -24,8 +24,8 @@ export default function Library() {
 
   return (
     <>
-      <div className="w-full flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
-        <div className="snap-center w-3/5 shrink-0">
+      <div className="w-full h-1/5 flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
+        <div className="snap-center w-3/5 h-full shrink-0">
           <LibraryCard
             id="1"
             storyName="Cinderella"
@@ -34,7 +34,7 @@ export default function Library() {
             link=""
           ></LibraryCard>
         </div>
-        <div className="snap-center w-3/5 shrink-0">
+        <div className="snap-center w-3/5 h-full shrink-0">
           <LibraryCard
             id="1"
             storyName="Little Red Riding Hood"

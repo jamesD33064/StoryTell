@@ -73,7 +73,7 @@ export default function Home() {
             <div className='grid h-full'>
               <h1 className='grid place-content-center text-2xl font-serif'>Quick Start</h1>
               <div className='grid'>
-                <StoryCard></StoryCard>
+                {/* <StoryCard></StoryCard> */}
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function Home() {
             <div className='grid h-full'>
               <h1 className='grid place-content-center text-2xl font-serif pt-5'>Simple Turtorial</h1>
               <div className='grid'>
-                <StoryCard></StoryCard>
+                {/* <StoryCard></StoryCard> */}
               </div>
             </div>
           </div>

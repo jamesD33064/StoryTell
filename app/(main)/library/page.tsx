@@ -23,7 +23,7 @@ export default function Library() {
   }, []);
 
   return (
-    <>
+    <main className="relative">
       <div className="w-full h-1/5 flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
         <div className="snap-center w-3/5 h-full shrink-0">
           <LibraryCard
@@ -72,6 +72,6 @@ export default function Library() {
           ))}
         </div>
       </div>
-    </>
+    </main>
   );
 }

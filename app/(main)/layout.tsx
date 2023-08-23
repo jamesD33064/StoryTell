@@ -1,15 +1,25 @@
-import Navbar from '@/components/Navbar/navbar'
+"use client";
+
+import { usePathname } from "next/navigation";
+import Navbar from "@/components/Navbar/navbar";
 
 export default function MainLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
+  const pathName = usePathname();
+
   return (
     <div>
-    
-    {children}
-    <Navbar />
+      {pathName.includes("library/") ? (
+        children
+      ) : (
+        <>
+          {children}
+          <Navbar />
+        </>
+      )}
     </div>
-  )
+  );
 }

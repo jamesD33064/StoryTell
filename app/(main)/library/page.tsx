@@ -31,7 +31,7 @@ export default function Library() {
             storyName="Cinderella"
             storyImg="http://140.134.37.23:8000/img/Cinderella.jpg"
             showTag={false}
-            link=""
+            link="/library/Cinderella"
           ></LibraryCard>
         </div>
         <div className="snap-center w-3/5 h-full shrink-0">
@@ -40,7 +40,7 @@ export default function Library() {
             storyName="Little Red Riding Hood"
             storyImg="http://140.134.37.23:8000/img/LittleRedRidingHood.png"
             showTag={false}
-            link=""
+            link="/library/LittleRedRidingHood"
           ></LibraryCard>
         </div>
       </div>
@@ -51,14 +51,14 @@ export default function Library() {
             storyName="Little Red Riding Hood"
             storyImg="http://140.134.37.23:8000/img/LittleRedRidingHood.png"
             showTag={true}
-            link=""
+            link="/library/LittleRedRidingHood"
           ></LibraryCard>
           <LibraryCard
             id="demo-2"
             storyName="conderella"
             storyImg="http://140.134.37.23:8000/img/Cinderella.jpg"
             showTag={true}
-            link=""
+            link="/library/Cinderella"
           ></LibraryCard>
           {stories.map((story, index) => (
             <LibraryCard

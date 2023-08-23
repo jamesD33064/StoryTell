@@ -1,12 +1,33 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Navbar() {
+  const [isNavbarVisible, setNavbarVisible] = useState(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      if (scrollY > 100) {
+        setNavbarVisible(false);
+      } else {
+        setNavbarVisible(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
-      <div className="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 bottom-0 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+      <div 
+      className={"fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 bottom-0 left-1/2 dark:bg-gray-700 dark:border-gray-600"
+      +(isNavbarVisible ? " opacity-100" : " opacity-0")}>
         <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
           <button
             data-tooltip-target="tooltip-home"

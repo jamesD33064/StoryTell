@@ -7,17 +7,30 @@ export default function Navbar() {
   const [isNavbarVisible, setNavbarVisible] = useState(true);
 
   useEffect(() => {
+    let prevScrollY = 0;
+
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      if (scrollY > 100) {
+      // 獲取當前滾動位置
+      const currentScrollY = window.scrollY;
+
+      // 計算滾動的位移
+      const scrollDelta = currentScrollY - prevScrollY;
+
+      // 檢查滾動方向並更新Navbar的可見性
+      if (scrollDelta > 0 && currentScrollY > 180) {
         setNavbarVisible(false);
-      } else {
+      } else if (scrollDelta < 0 || currentScrollY <= 100) {
         setNavbarVisible(true);
       }
+
+      // 更新prevScrollY
+      prevScrollY = currentScrollY;
     };
 
+    // 監聽滾動事件
     window.addEventListener("scroll", handleScroll);
 
+    // 清理監聽器
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };

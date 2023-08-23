@@ -16,8 +16,14 @@ export default function MainLayout({
         children
       ) : (
         <>
-          {children}
-          <Navbar />
+          {/* <div className="flex h-screen w-screen flex-col">
+            <div className="flex flex-grow items-center justify-center"> */}
+              {children}
+            {/* </div>
+            <nav className="tol-0 sticky flex h-16 w-full items-center justify-center"> */}
+              <Navbar />
+            {/* </nav>
+          </div> */}
         </>
       )}
     </div>

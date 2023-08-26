@@ -15,8 +15,8 @@ export default function Home() {
     <>
       <Head>
         <title>Story Tell</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"></meta>
+        <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className="relative flex min-h-screen flex-col justify-center overflow-hidden">
@@ -73,7 +73,7 @@ export default function Home() {
             <div className='grid h-full'>
               <h1 className='grid place-content-center text-2xl font-serif'>Quick Start</h1>
               <div className='grid'>
-                <StoryCard></StoryCard>
+                {/* <StoryCard></StoryCard> */}
               </div>
             </div>
           </div>
@@ -83,7 +83,7 @@ export default function Home() {
             <div className='grid h-full'>
               <h1 className='grid place-content-center text-2xl font-serif pt-5'>Simple Turtorial</h1>
               <div className='grid'>
-                <StoryCard></StoryCard>
+                {/* <StoryCard></StoryCard> */}
               </div>
             </div>
           </div>

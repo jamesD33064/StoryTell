@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Component } from "react";
 import Navbar from "@/components/Navbar/navbar";
 import Wavbar from "@/components/WAVbar/wavbar";
-import StoryCard from "@/components/StoryCard/page";
+// import StoryCard from "@/components/StoryCard/page";
 
 export default function Home() {
   return (
@@ -19,13 +19,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="relative flex min-h-screen flex-col justify-center overflow-hidden">
+      <main className="fixed w-screen flex h-screen flex-col justify-center overflow-hidden">
         {/* 最外層snap */} 
-        <div
-          className="snap-mandatory snap-y overflow-y-auto h-screen"
-          >
+        <div className="snap-mandatory snap-y overflow-y-auto h-screen">
           {/* snap page1 */}
-          <div className='snap-start h-full'>
+          <div className='snap-center h-screen'>
             <div className="grid h-screen py-20 px-10 place-items-center">
 
               <div className="">
@@ -69,9 +67,9 @@ export default function Home() {
           </div>
 
           {/* snap page2 */}
-          <div className='snap-start h-full pt-24'>
+          <div className='snap-center h-screen pt-24'>
             <div className='grid h-full'>
-              <h1 className='grid place-content-center text-2xl font-serif'>Quick Start</h1>
+              <h1 className='grid place-content-center text-2xl font-serif'>Snap 2</h1>
               <div className='grid'>
                 {/* <StoryCard></StoryCard> */}
               </div>
@@ -79,9 +77,9 @@ export default function Home() {
           </div>
 
           {/* snap page3 */}
-          <div className='snap-start h-full pt-20'>
+          <div className='snap-center h-screen pt-24'>
             <div className='grid h-full'>
-              <h1 className='grid place-content-center text-2xl font-serif pt-5'>Simple Turtorial</h1>
+              <h1 className='grid place-content-center text-2xl font-serif'>Snap 3</h1>
               <div className='grid'>
                 {/* <StoryCard></StoryCard> */}
               </div>

@@ -114,3 +114,9 @@ body{
   @apply h-full overflow-x-hidden;
   background-color: #ffffff;
 }
+
+@supports (-webkit-touch-callout: none) {
+  .h-screen {
+    height: -webkit-fill-available;
+  }
+}

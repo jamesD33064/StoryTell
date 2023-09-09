@@ -12,7 +12,7 @@ export default function Library() {
   const [stories, setStories] = useState<StoryInfo[]>([]);
   useEffect(() => {
     axios
-      .get("http://140.134.37.23:8000/story/getAllStoryInfo") // 使用代理路径
+      .get("http://140.134.37.23:8000/api/story/getAllStoryInfo") // 使用代理路径
       .then((response) => {
         setStories(response.data);
         console.log(response.data);
@@ -38,24 +38,24 @@ export default function Library() {
           <LibraryCard
             id="1"
             storyName="Little Red Riding Hood"
-            storyImg="https://scontent.frmq1-1.fna.fbcdn.net/v/t39.30808-6/348266162_589549166654603_7895757738317238586_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=9XwlRUG9QacAX_D1Oc3&_nc_ht=scontent.frmq1-1.fna&oh=00_AfCmk71Ooi70mB0ATdHUGOKVteLAJDjQ0nvtyrSllvhSeQ&oe=64EBC075"
+            storyImg="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.30808-6/348266162_589549166654603_7895757738317238586_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=Nqsg4VblsZsAX_W8CPA&_nc_ht=scontent-hkt1-1.xx&oh=00_AfDP5wz3CXt_UTAAAhhBQMr1-Fm6rboT1G-imxzC4gR70w&oe=64FD8CB5"
             showTag={false}
             link="/library/LittleRedRidingHood"
           ></LibraryCard>
         </div>
       </div>
       <div>
-        <div className="w-full flex flex-col align-middle justify-center gap-8 p-14">
+        <div className="w-full flex flex-col align-middle justify-center gap-8 p-6">
           <LibraryCard
             id="demo-1"
             storyName="Little Red Riding Hood"
-            storyImg="https://scontent.frmq1-1.fna.fbcdn.net/v/t39.30808-6/348266162_589549166654603_7895757738317238586_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=9XwlRUG9QacAX_D1Oc3&_nc_ht=scontent.frmq1-1.fna&oh=00_AfCmk71Ooi70mB0ATdHUGOKVteLAJDjQ0nvtyrSllvhSeQ&oe=64EBC075"
+            storyImg="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.30808-6/348266162_589549166654603_7895757738317238586_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=Nqsg4VblsZsAX_W8CPA&_nc_ht=scontent-hkt1-1.xx&oh=00_AfDP5wz3CXt_UTAAAhhBQMr1-Fm6rboT1G-imxzC4gR70w&oe=64FD8CB5"
             showTag={true}
             link="/library/LittleRedRidingHood"
           ></LibraryCard>
           <LibraryCard
             id="demo-2"
-            storyName="conderella"
+            storyName="cinderella"
             storyImg="https://obs.line-scdn.net/0hMrBADxguEl1_ODknDattCkVuETJMVAFeGw5DXjxWTGkHCAANFAxYM1w9TjpQD1UDEQ5VPF89CWwCDF1bRA1Y/w644"
             showTag={true}
             link="/library/Cinderella"

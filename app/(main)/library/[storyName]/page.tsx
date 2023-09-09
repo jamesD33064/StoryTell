@@ -1,10 +1,45 @@
 "use client";
-
+import React, { useEffect, useState } from 'react';
 import Wavbar from "@/components/WAVbar/wavbar";
 
 export default function Page({ params }: { params: { storyName: string } }) {
+  const [storyContent, setStoryContent] = useState<Array<string | { sentence: string; sentenceId: number; emotion: string; }>>([]);
+
+  useEffect(() => {
+    const getAllStoryInfo = 'http://140.134.37.23:8000/api/story/getAllStoryInfo';
+
+    fetch(getAllStoryInfo)
+      .then(response => response.json())
+      .then((data: { _id: string }[]) => {
+        const storyIds = data.map(story => story._id);
+        fetchStoryDetails(storyIds);
+      })
+      .catch(error => {
+        console.error('發生錯誤：', error);
+      });
+  }, []);
+
+  function fetchStoryDetails(storyIds: string[]) {
+    const storyDetailBaseUrl = 'http://140.134.37.23:8000/api/story/getStoryDetail/';
+
+    storyIds.forEach(storyId => {
+      const storyDetailUrl = storyDetailBaseUrl + storyId;
+
+      fetch(storyDetailUrl)
+        .then(response => response.json())
+        .then((storyData: { storyContent: string[] }) => {
+          const storyContent = storyData.storyContent;
+
+          setStoryContent(prevStoryContent => [...prevStoryContent, ...storyContent]);
+        })
+        .catch(error => {
+          console.error('發生錯誤：', error);
+        });
+    });
+  }
   return (
     <>
+
       <main className="flex min-h-screen flex-col justify-center overflow-hidden">
         <div className='relative h-screen flex justify-center items-center'>
           <div className="bg-white rounded-lg w-1/2 h-20 flex absolute top-20 left-8">
@@ -16,26 +51,14 @@ export default function Page({ params }: { params: { storyName: string } }) {
           <div className="bg-white rounded-lg w-5/6 h-3/5 mx-auto overflow-y-auto">
             {/* 中 */}
             <div className="p-8 mt-10 grid grid-cols-1 gap-y-10">
-           {/*} {stories.map((story, index) => (
-            
-              key={index}
-              id={story._id}
-              storyName={story.storyName}
-              showTag={true}
-              link=""
-            
-          ))}*/}
-              <p className="text-gray-600">This is the content of your homepage.</p>
-              <p className="text-gray-600">This is the content of your homepage.</p>
-              <p className="text-gray-600">This is the content of your homepage.</p>
-              <p className="text-gray-600">This is the content of your homepage.</p>
-              <p className="text-gray-600">This is the content of your homepage.</p>
-              <p className="text-gray-600">This is the content of your homepage.</p>
-              <p className="text-gray-600">This is the content of your homepage.</p>
-              <p className="text-gray-600">This is the content of your homepage.</p>
-              <p className="text-gray-600">This is the content of your homepage.</p>
-              <p className="text-gray-600">This is the content of your homepage.</p>
+              {storyContent.slice(0, 7).map((sentence, index) => (
+                <div key={index} className="text-gray-600">
+                  <p>{typeof sentence === 'string' ? sentence : sentence.sentence}</p>
+                </div>
+              ))}
             </div>
+
+
           </div>
 
           <div className="bg-white rounded-lg w-5/6 h-12 mx-auto absolute bottom-28">

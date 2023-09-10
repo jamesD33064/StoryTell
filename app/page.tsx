@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { Component } from "react";
 import Navbar from "@/components/Navbar/navbar";
 import Wavbar from "@/components/WAVbar/wavbar";
-import StoryCard from "@/components/StoryCard/page";
+// import StoryCard from "@/components/StoryCard/page";
 
 export default function Home() {
   return (

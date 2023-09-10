@@ -19,54 +19,54 @@ export default function SentenceCarousel({ storyContent }: SentenceProps) {
         ))}
 
         {/* FORDEMO */}
-        <div className="snap-center h-fit p-2">
+        <p className="snap-center h-fit p-2">
           Once upon a time there was a cute little girl
-        </div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">
           Anyone who saw the child loved him, but especially the grandmother,
           who seemed to love him so much that there was nothing he wouldn't give
           to the child.
-        </div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">
           Once my grandmother gave me a red velvet hood
-        </div>
-        <div className="snap-center h-fit p-2">So the three were happy</div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">So the three were happy</p>
+        <p className="snap-center h-fit p-2">
           The hunter skinned the wolf and took it home
-        </div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">
           Grandmother ate the cake that Little Red Riding Hood brought and drank
           the wine, but Little Red Riding Hood from now on, when Mother says she
           shouldn't, she won't leave the road and run into the woods alone.
-        </div>
-        <div className="snap-center h-fit p-2">I thought</div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">I thought</p>
+        <p className="snap-center h-fit p-2">
           There was also a story like this
-        </div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">
           Once, when Little Red Riding Hood was bringing cake to the old woman,
           another wolf spoke to her and invited her to get off the road.
-        </div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">
           But Little Red Riding Hood was wary, went straight ahead, and told the
           old woman, I met a wolf, who said good morning to me, but his eyes
           were so bad, if I hadn't been in the way they were walking I said you
           must have eaten
-        </div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">
           Well then, said the old woman
-        </div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">
           Let's close the door so the wolf doesn't come in.
-        </div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">
           Shortly afterwards the wolf knocked on the door and said,
           'Grandmother, open the door, Little Red Riding Hood, I'm bringing you
           a cake.
-        </div>
-        <div className="snap-center h-fit p-2">
+        </p>
+        <p className="snap-center h-fit p-2">
           But they didn't say a word and didn't open the door.
-        </div>
+        </p>
       </div>
     </>
   );

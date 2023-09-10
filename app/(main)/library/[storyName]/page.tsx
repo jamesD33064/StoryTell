@@ -47,7 +47,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
   }
   return (
     <>
-      <main className="flex h-screen flex-col align-middle justify-center overflow-hidden">
+      <main className="fixed w-screen flex h-screen flex-col align-middle justify-center overflow-hidden">
         <div className="flex grow flex-col items-center justify-center m-4">
           <div className="flex flex-col h-full w-full">
             <div className="flex h-fit">
@@ -58,15 +58,19 @@ export default function Page({ params }: { params: { storyName: string } }) {
               </div>
               <div className="ml-2 mb-2 w-1/3 bg-slate-50 rounded-lg">
                 <p className="w-full p-2 flex justify-center align-middle">
-                  123
+                  {/* FORDEMO */}
+                  speaker
                 </p>
               </div>
             </div>
-            <div className="flex grow bg-white">
+            <div className="flex grow bg-white h-0">
               <SentenceCarousel storyContent={storyContent}></SentenceCarousel>
             </div>
             <div className="flex bg-slate-50 rounded-b-lg">
-              <p className="w-full p-2 flex justify-center align-middle">123</p>
+              <p className="w-full p-2 flex justify-center align-middle">
+                emotion
+                {/* FORDEMO */}
+              </p>
             </div>
           </div>
         </div>

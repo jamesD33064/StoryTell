@@ -1,53 +1,23 @@
-"use client"
+"use client";
 
-import React, { Component, useState } from 'react';
+import React, { Component, useState } from "react";
 
-interface SentenceProps{
-    src:string;
+interface SentenceProps {
+    storyContent: Array<
+    string | { sentence: string; sentenceId: number; emotion: string }
+  >;
 }
 
-export default function SentenceCarousel() {
-    // function generat(src:string){
-
-    // }
-
-    return (
-        <>
-            {/* <div className="scroll-ml-6 snap-start ...">
-                    <img src="/next.svg" className="rounded-box" />
-                </div> */}
-            <div className="scroll-pl-6 snap-y overflow-y-auto h-64 text-slate-800">
-                <div className='snap-start h-10'>
-                    <h1>tsetsetsetsetsetestse</h1>
-                </div>
-                <div className='snap-start h-10'>
-                    <h1>tsetsetsetsetsetestse</h1>
-                </div>
-                <div className='snap-start h-10'>
-                    <h1>tsetsetsetsetsetestse</h1>
-                </div>
-                <div className='snap-start h-10'>
-                    <h1>tsetsetsetsetsetestse</h1>
-                </div>
-                <div className='snap-start h-10'>
-                    <h1>tsetsetsetsetsetestse</h1>
-                </div>
-                <div className='snap-start h-10'>
-                    <h1>tsetsetsetsetsetestse</h1>
-                </div>
-                <div className='snap-start h-10'>
-                    <h1>tsetsetsetsetsetestse</h1>
-                </div>
-                <div className='snap-start h-10'>
-                    <h1>tsetsetsetsetsetestse</h1>
-                </div>
-                <div className='snap-start h-10'>
-                    <h1>tsetsetsetsetsetestse</h1>
-                </div>
-                <div className='snap-start h-10'>
-                    <h1>tsetsetsetsetsetestse</h1>
-                </div>
-            </div>
-        </>
-    );
+export default function SentenceCarousel({ storyContent }: SentenceProps) {
+  return (
+    <>
+      <div className="scroll-pl-6 snap-y overflow-y-auto text-slate-800 text-center w-full h-60">
+        {storyContent.map((text, index) => (
+          <div key={index} id={String(index)} className="snap-center h-fit p-2">
+            {typeof text === "string" ? text : text.sentence}
+          </div>
+        ))}
+      </div>
+    </>
+  );
 }

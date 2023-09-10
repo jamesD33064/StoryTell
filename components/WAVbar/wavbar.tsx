@@ -38,11 +38,9 @@ export default function Wavbar() {
     }
   }
 
-  const [rangeValue, setRangeValue] = useState<number>(0);
-
   return (
     <>
-      <div className="fixed bottom-0 left-0 z-50 grid w-full h-24 grid-cols-1 px-8 bg-white border-t border-gray-200 md:grid-cols-3 dark:bg-gray-700 dark:border-gray-600">
+      <nav className="bottom-0 sticky flex w-full items-center h-20 justify-center p-8 bg-white border-t border-gray-200 md:grid-cols-3 dark:bg-gray-700 dark:border-gray-600">
         <div className="items-center justify-center hidden mr-auto text-gray-500 dark:text-gray-400 md:flex">
           <img className="h-8 mr-3 rounded" src="" />
           <span className="text-sm">Flowbite Crash Course</span>
@@ -299,7 +297,7 @@ export default function Wavbar() {
             <div className="tooltip-arrow" data-popper-arrow></div>
           </div>
         </div>
-      </div>
+      </nav>
     </>
   );
 }

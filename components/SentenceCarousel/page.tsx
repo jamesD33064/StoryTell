@@ -36,7 +36,7 @@ export default function SentenceCarousel({ storyContent }: SentenceProps) {
   ];
   return (
     <>
-      <div className="scroll-pl-6 snap-y overflow-y-auto text-slate-800 text-center w-full h-full">
+      <div className="scroll-pl-6 snap-y snap-mandatory overflow-y-auto text-slate-800 text-center w-full h-full no-scrollbar">
         {storyContent.map((text, index) => (
           <div key={index} id={String(index)} className="snap-center h-fit p-2">
             {typeof text === "string" ? text : text.sentence}
@@ -44,11 +44,13 @@ export default function SentenceCarousel({ storyContent }: SentenceProps) {
         ))}
 
         {/* FORDEMO */}
+        <div className="h-full p-2"></div>
         {storyContentArray.map((text, index) => (
           <div key={index} id={String(index)} className="snap-center h-fit p-2">
             {typeof text === "string" ? text : text}
           </div>
         ))}
+        <div className="h-full p-2"></div>
       </div>
     </>
   );

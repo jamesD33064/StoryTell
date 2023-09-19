@@ -25,6 +25,15 @@ export default function Library() {
   return (
     <main className="relative">
       <div className="w-full h-1/5 flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
+      <div className="snap-center w-3/5 h-full shrink-0">
+          <LibraryCard
+            id="1"
+            storyName="Cinderella"
+            storyImg="https://obs.line-scdn.net/0hMrBADxguEl1_ODknDattCkVuETJMVAFeGw5DXjxWTGkHCAANFAxYM1w9TjpQD1UDEQ5VPF89CWwCDF1bRA1Y/w644"
+            showTag={false}
+            link="/library/Cinderella"
+          ></LibraryCard>
+        </div>
         <div className="snap-center w-3/5 h-full shrink-0">
           <LibraryCard
             id="1"
@@ -37,10 +46,10 @@ export default function Library() {
         <div className="snap-center w-3/5 h-full shrink-0">
           <LibraryCard
             id="1"
-            storyName="Little Red Riding Hood"
-            storyImg="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.30808-6/348266162_589549166654603_7895757738317238586_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=Nqsg4VblsZsAX_W8CPA&_nc_ht=scontent-hkt1-1.xx&oh=00_AfDP5wz3CXt_UTAAAhhBQMr1-Fm6rboT1G-imxzC4gR70w&oe=64FD8CB5"
+            storyName="Cinderella"
+            storyImg="https://obs.line-scdn.net/0hMrBADxguEl1_ODknDattCkVuETJMVAFeGw5DXjxWTGkHCAANFAxYM1w9TjpQD1UDEQ5VPF89CWwCDF1bRA1Y/w644"
             showTag={false}
-            link="/library/LittleRedRidingHood"
+            link="/library/Cinderella"
           ></LibraryCard>
         </div>
       </div>
@@ -49,7 +58,7 @@ export default function Library() {
           <LibraryCard
             id="demo-1"
             storyName="Little Red Riding Hood"
-            storyImg="https://scontent-hkt1-1.xx.fbcdn.net/v/t39.30808-6/348266162_589549166654603_7895757738317238586_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=a2f6c7&_nc_ohc=Nqsg4VblsZsAX_W8CPA&_nc_ht=scontent-hkt1-1.xx&oh=00_AfDP5wz3CXt_UTAAAhhBQMr1-Fm6rboT1G-imxzC4gR70w&oe=64FD8CB5"
+            storyImg="https://obs.line-scdn.net/0hMrBADxguEl1_ODknDattCkVuETJMVAFeGw5DXjxWTGkHCAANFAxYM1w9TjpQD1UDEQ5VPF89CWwCDF1bRA1Y/w644"
             showTag={true}
             link="/library/LittleRedRidingHood"
           ></LibraryCard>

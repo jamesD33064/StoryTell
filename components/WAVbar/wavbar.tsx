@@ -1,83 +1,82 @@
 "use client";
 
-import React, { useState } from "react";
-// import styles from './wavbar.module.css'
+import React, { useEffect, useState } from "react";
 
-export default function Wavbar() {
-  const [audioplayer_state, set_audioplayer_state] = React.useState(false);
+interface WavBarProps {
+  nowProgress: number;
+  totalProgress: number;
+  audioSrc: string;
+  onPlayPauseToggle: () => void; // 增加播放/暫停切換的 callback 函數
+  onAudioEnded: () => void; // 增加音訊播放完成的 callback 函數
+}
 
-  function play() {
-    set_audioplayer_state(!audioplayer_state);
-    var audio = document.querySelector("#audio") as HTMLAudioElement;
-    audio.play();
-  }
-  function pause() {
-    set_audioplayer_state(!audioplayer_state);
-    var audio = document.querySelector("#audio") as HTMLAudioElement;
-    audio.pause();
-  }
+export default function Wavbar({
+  nowProgress,
+  totalProgress,
+  audioSrc,
+  onPlayPauseToggle,
+  onAudioEnded,
+}: WavBarProps) {
+  const [playState, set_playState] = useState(false);
+  const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(
+    null
+  );
+  const [progressBarWidth, setprogressBarWidth] = useState(0);
 
-  function seekbaronchange(value: number) {
-    var audio = document.querySelector("#audio") as HTMLAudioElement;
-    audio.currentTime = value;
-  }
-
-  function timeupdate() {
-    var seekbar = document.querySelector("#seekbar") as HTMLInputElement;
-    var audio = document.querySelector("#audio") as HTMLAudioElement;
-
-    seekbar.value = String(audio.currentTime);
-
-    if (seekbar.min != "0") {
-      seekbar.min = "0";
-      seekbar.max = String(audio.duration);
+  // 監聽 playState 的變化，並根據其值播放或停止音訊
+  useEffect(() => {
+    if (audioElement) {
+      if (playState) {
+        audioElement.play();
+      } else {
+        audioElement.pause();
+      }
     }
-    if (String(audio.currentTime) == seekbar.max) {
-      seekbar.value = "0";
-      pause();
+  }, [playState, audioElement]);
+
+  // 監聽 audioSrc 的變化，當 audioSrc 變化時重新設置音訊來源
+  useEffect(() => {
+    if (audioElement) {
+      // 停止當前音訊播放
+      audioElement.pause();
+
+      // TODO 不確定會不會有重複設置監聽器的問題
+      // 使用 useEffect 監聽音訊播放完了沒
+      audioElement.addEventListener("ended", onAudioEnded);
+
+      // 設置新的音訊來源
+      audioElement.src = audioSrc;
+
+      // 檢查是否要播放
+      if (playState) {
+        audioElement.play();
+      }
+
+      setprogressBarWidth((nowProgress / totalProgress) * 100);
     }
+  }, [audioSrc, audioElement, playState]);
+
+  // 點擊暫停按鈕時切換 playState 狀態
+  function togglePlayPause() {
+    set_playState(!playState);
+    onPlayPauseToggle();
   }
 
   return (
     <>
+      <audio
+        ref={(audio) => {
+          setAudioElement(audio);
+        }}
+        className="invisible"
+      >
+        <source src={audioSrc} type="audio/mpeg" />
+      </audio>
+
       <nav className="bottom-0 sticky flex w-full items-center h-20 justify-center p-8 bg-white border-t border-gray-200 md:grid-cols-3 dark:bg-gray-700 dark:border-gray-600">
-        <div className="items-center justify-center hidden mr-auto text-gray-500 dark:text-gray-400 md:flex">
-          <img className="h-8 mr-3 rounded" src="" />
-          <span className="text-sm">Flowbite Crash Course</span>
-        </div>
         <div className="flex items-center w-full">
           <div className="w-full">
             <div className="flex items-center justify-center mx-auto mb-1">
-              <button
-                data-tooltip-target="tooltip-shuffle"
-                type="button"
-                className="p-2.5 group rounded-full hover:bg-gray-100 mr-1 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-600 dark:hover:bg-gray-600"
-              >
-                <svg
-                  className="w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 18"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M11.484 6.166 13 4h6m0 0-3-3m3 3-3 3M1 14h5l1.577-2.253M1 4h5l7 10h6m0 0-3 3m3-3-3-3"
-                  />
-                </svg>
-                <span className="sr-only">Shuffle video</span>
-              </button>
-              <div
-                id="tooltip-shuffle"
-                role="tooltip"
-                className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-              >
-                Shuffle video
-                <div className="tooltip-arrow" data-popper-arrow></div>
-              </div>
               <button
                 data-tooltip-target="tooltip-previous"
                 type="button"
@@ -103,6 +102,7 @@ export default function Wavbar() {
                 <div className="tooltip-arrow" data-popper-arrow></div>
               </div>
               <button
+                onClick={togglePlayPause}
                 data-tooltip-target="tooltip-pause"
                 type="button"
                 className="inline-flex items-center justify-center p-2.5 mx-2 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
@@ -154,147 +154,21 @@ export default function Wavbar() {
                 Next video
                 <div className="tooltip-arrow" data-popper-arrow></div>
               </div>
-              <button
-                data-tooltip-target="tooltip-restart"
-                type="button"
-                className="p-2.5 group rounded-full hover:bg-gray-100 mr-1 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-600 dark:hover:bg-gray-600"
-              >
-                <svg
-                  className="w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 18 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M16 1v5h-5M2 19v-5h5m10-4a8 8 0 0 1-14.947 3.97M1 10a8 8 0 0 1 14.947-3.97"
-                  />
-                </svg>
-                <span className="sr-only">Restart video</span>
-              </button>
-              <div
-                id="tooltip-restart"
-                role="tooltip"
-                className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-              >
-                Restart video
-                <div className="tooltip-arrow" data-popper-arrow></div>
-              </div>
             </div>
             <div className="flex items-center justify-between space-x-2">
               <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                3:45
+                {nowProgress}
               </span>
               <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-800">
-                <div className="bg-blue-600 h-1.5 rounded-full"></div>
+                {/* TODO  進度條寬度設置*/}
+                <div
+                  className={`bg-blue-600 h-1.5 rounded-full w-[${progressBarWidth}%]`}
+                ></div>
               </div>
               <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                5:00
+                {totalProgress}
               </span>
             </div>
-          </div>
-        </div>
-        <div className="items-center justify-center hidden ml-auto md:flex">
-          <button
-            data-tooltip-target="tooltip-playlist"
-            type="button"
-            className="p-2.5 group rounded-full hover:bg-gray-100 mr-1 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-600 dark:hover:bg-gray-600"
-          >
-            <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 18 16"
-            >
-              <path d="M14.316.051A1 1 0 0 0 13 1v8.473A4.49 4.49 0 0 0 11 9c-2.206 0-4 1.525-4 3.4s1.794 3.4 4 3.4 4-1.526 4-3.4a2.945 2.945 0 0 0-.067-.566c.041-.107.064-.22.067-.334V2.763A2.974 2.974 0 0 1 16 5a1 1 0 0 0 2 0C18 1.322 14.467.1 14.316.051ZM10 3H1a1 1 0 0 1 0-2h9a1 1 0 1 1 0 2Z" />
-              <path d="M10 7H1a1 1 0 0 1 0-2h9a1 1 0 1 1 0 2Zm-5 4H1a1 1 0 0 1 0-2h4a1 1 0 1 1 0 2Z" />
-            </svg>
-            <span className="sr-only">View playlist</span>
-          </button>
-          <div
-            id="tooltip-playlist"
-            role="tooltip"
-            className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-          >
-            View playlist
-            <div className="tooltip-arrow" data-popper-arrow></div>
-          </div>
-          <button
-            data-tooltip-target="tooltip-captions"
-            type="button"
-            className="p-2.5 group rounded-full hover:bg-gray-100 mr-1 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-600 dark:hover:bg-gray-600"
-          >
-            <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 16"
-            >
-              <path d="M18 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM7.648 9.636c.25 0 .498-.064.717-.186a1 1 0 1 1 .979 1.745 3.475 3.475 0 1 1 .185-5.955 1 1 0 1 1-1.082 1.681 1.475 1.475 0 1 0-.799 2.715Zm6.186 0c.252 0 .5-.063.72-.187a1 1 0 1 1 .974 1.746 3.475 3.475 0 1 1 .188-5.955 1 1 0 0 1-1.084 1.681 1.475 1.475 0 1 0-.8 2.715h.002Z" />
-            </svg>
-            <span className="sr-only">Captions</span>
-          </button>
-          <div
-            id="tooltip-captions"
-            role="tooltip"
-            className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-          >
-            Toggle captions
-            <div className="tooltip-arrow" data-popper-arrow></div>
-          </div>
-          <button
-            data-tooltip-target="tooltip-expand"
-            type="button"
-            className="p-2.5 group rounded-full hover:bg-gray-100 mr-1 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-600 dark:hover:bg-gray-600"
-          >
-            <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 18 18"
-            >
-              <path d="M18 .989a1.016 1.016 0 0 0-.056-.277c-.011-.034-.009-.073-.023-.1a.786.786 0 0 0-.066-.1.979.979 0 0 0-.156-.224l-.007-.01a.873.873 0 0 0-.116-.073.985.985 0 0 0-.2-.128.959.959 0 0 0-.231-.047A.925.925 0 0 0 17 0h-4a1 1 0 1 0 0 2h1.664l-3.388 3.552a1 1 0 0 0 1.448 1.381L16 3.5V5a1 1 0 0 0 2 0V.989ZM17 12a1 1 0 0 0-1 1v1.586l-3.293-3.293a1 1 0 0 0-1.414 1.414L14.586 16H13a1 1 0 0 0 0 2h4a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1ZM3.414 2H5a1 1 0 0 0 0-2H1a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0V3.414l3.536 3.535A1 1 0 0 0 6.95 5.535L3.414 2Zm2.139 9.276L2 14.665V13a1 1 0 1 0-2 0v4c.006.046.015.09.027.135.006.08.022.16.048.235a.954.954 0 0 0 .128.2.95.95 0 0 0 .073.117l.01.007A.983.983 0 0 0 1 18h4a1 1 0 0 0 0-2H3.5l3.436-3.276a1 1 0 0 0-1.38-1.448h-.003Z" />
-            </svg>
-            <span className="sr-only">Expand</span>
-          </button>
-          <div
-            id="tooltip-expand"
-            role="tooltip"
-            className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-          >
-            Full screen
-            <div className="tooltip-arrow" data-popper-arrow></div>
-          </div>
-          <button
-            data-tooltip-target="tooltip-volume"
-            type="button"
-            className="p-2.5 group rounded-full hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-600 dark:hover:bg-gray-600"
-          >
-            <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 18"
-            >
-              <path d="M10.836.357a1.978 1.978 0 0 0-2.138.3L3.63 5H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h1.63l5.07 4.344a1.985 1.985 0 0 0 2.142.299A1.98 1.98 0 0 0 12 15.826V2.174A1.98 1.98 0 0 0 10.836.357Zm2.728 4.695a1.001 1.001 0 0 0-.29 1.385 4.887 4.887 0 0 1 0 5.126 1 1 0 0 0 1.674 1.095A6.645 6.645 0 0 0 16 9a6.65 6.65 0 0 0-1.052-3.658 1 1 0 0 0-1.384-.29Zm4.441-2.904a1 1 0 0 0-1.664 1.11A10.429 10.429 0 0 1 18 9a10.465 10.465 0 0 1-1.614 5.675 1 1 0 1 0 1.674 1.095A12.325 12.325 0 0 0 20 9a12.457 12.457 0 0 0-1.995-6.852Z" />
-            </svg>
-            <span className="sr-only">Adjust volume</span>
-          </button>
-          <div
-            id="tooltip-volume"
-            role="tooltip"
-            className="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700"
-          >
-            Adjust volume
-            <div className="tooltip-arrow" data-popper-arrow></div>
           </div>
         </div>
       </nav>

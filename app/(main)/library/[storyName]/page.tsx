@@ -102,7 +102,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
             <div className="flex bg-slate-50 rounded-b-lg w-full gap-8 p-2 snap-mandatory snap-x overflow-x-auto no-scrollbar">
               <div className="w-full h-full p-2 shrink-0"></div>
               {emoList.map((emo, index) => (
-                <div className="snap-center w-fit h-full p-2 shrink-0">
+                <div key={index} className="snap-center w-fit h-full p-2 shrink-0">
                   <p className="w-full flex justify-center align-middle">
                     {emo}
                   </p>

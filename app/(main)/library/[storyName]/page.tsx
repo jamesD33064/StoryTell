@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Wavbar from "@/components/WAVbar/wavbar";
 import SentenceCarousel from "@/components/SentenceCarousel/page";
+import SpeakerDropdown from"@/components/SpeakerDropdown/page";
 
 export default function Page({ params }: { params: { storyName: string } }) {
   //--------------------- 顯示字幕
@@ -59,6 +60,15 @@ export default function Page({ params }: { params: { storyName: string } }) {
     "快哭了",
   ];
 
+  //--------------------- 情緒列表控制
+  const speakerList = [
+    "卜學亮",
+    "葉展綸",
+    "高橋李依",
+    "小野大輔",
+    "子安武人",
+  ];
+
   //--------------------- 播放進度 
   // 狀態用於監聽播放狀態
   const [isPlaying, setIsPlaying] = useState(false);
@@ -88,12 +98,11 @@ export default function Page({ params }: { params: { storyName: string } }) {
                   {params.storyName}
                 </h1>
               </div>
-              <div className="ml-2 mb-2 w-1/3 bg-slate-50 rounded-lg">
-                <p className="w-full p-2 flex justify-center align-middle">
+              <div className="ml-2 mb-2 w-1/3">
+                <div className="w-full flex justify-center align-middle">
                   {/* FORDEMO */}
-                  speaker-
-                  {isPlaying ? "playing" : "pause"}
-                </p>
+                  <SpeakerDropdown speakerList={speakerList}></SpeakerDropdown>
+                </div>
               </div>
             </div>
             <div className="flex grow bg-white h-0">

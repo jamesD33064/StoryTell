@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Wavbar from "@/components/WAVbar/wavbar";
 import SentenceCarousel from "@/components/SentenceCarousel/page";
+import SpeakerDropdown from"@/components/SpeakerDropdown/page";
 
 export default function Page({ params }: { params: { storyName: string } }) {
   //--------------------- 顯示字幕
@@ -91,8 +92,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
               <div className="ml-2 mb-2 w-1/3 bg-slate-50 rounded-lg">
                 <p className="w-full p-2 flex justify-center align-middle">
                   {/* FORDEMO */}
-                  speaker-
-                  {isPlaying ? "playing" : "pause"}
+                  <SpeakerDropdown></SpeakerDropdown>
                 </p>
               </div>
             </div>

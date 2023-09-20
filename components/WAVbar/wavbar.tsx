@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 interface WavBarProps {
   nowProgress: number;
@@ -18,43 +18,45 @@ export default function Wavbar({
   onAudioEnded,
 }: WavBarProps) {
   const [playState, set_playState] = useState(false);
-  const [audioElement, setAudioElement] = useState<HTMLAudioElement | null>(
-    null
-  );
+  const audioElement = useRef<HTMLAudioElement | null>(null);
+  const progressBarElement = useRef<HTMLDivElement | null>(null);
   const [progressBarWidth, setprogressBarWidth] = useState(0);
 
   // 監聽 playState 的變化，並根據其值播放或停止音訊
   useEffect(() => {
-    if (audioElement) {
+    if (audioElement.current) {
       if (playState) {
-        audioElement.play();
+        audioElement.current.play();
       } else {
-        audioElement.pause();
+        audioElement.current.pause();
       }
     }
   }, [playState, audioElement]);
 
   // 監聽 audioSrc 的變化，當 audioSrc 變化時重新設置音訊來源
   useEffect(() => {
-    if (audioElement) {
+    if (audioElement.current && progressBarElement.current) {
       // 停止當前音訊播放
-      audioElement.pause();
+      audioElement.current.pause();
 
       // TODO 不確定會不會有重複設置監聽器的問題
       // 使用 useEffect 監聽音訊播放完了沒
-      audioElement.addEventListener("ended", onAudioEnded);
+      audioElement.current.addEventListener("ended", onAudioEnded);
 
       // 設置新的音訊來源
-      audioElement.src = audioSrc;
+      audioElement.current.src = audioSrc;
 
       // 檢查是否要播放
       if (playState) {
-        audioElement.play();
+        audioElement.current.play();
       }
 
-      setprogressBarWidth((nowProgress / totalProgress) * 100);
+      progressBarElement.current.style.width = `${
+        (nowProgress / totalProgress) * 100
+      }%`;
+      // setprogressBarWidth((nowProgress / totalProgress) * 100);
     }
-  }, [audioSrc, audioElement, playState]);
+  }, [audioSrc, playState]);
 
   // 點擊暫停按鈕時切換 playState 狀態
   function togglePlayPause() {
@@ -64,12 +66,7 @@ export default function Wavbar({
 
   return (
     <>
-      <audio
-        ref={(audio) => {
-          setAudioElement(audio);
-        }}
-        className="invisible"
-      >
+      <audio ref={audioElement} className="invisible">
         <source src={audioSrc} type="audio/mpeg" />
       </audio>
 
@@ -107,19 +104,35 @@ export default function Wavbar({
                 type="button"
                 className="inline-flex items-center justify-center p-2.5 mx-2 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
               >
-                <svg
-                  className="w-3 h-3 text-white"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 10 16"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M0 .8C0 .358.32 0 .714 0h1.429c.394 0 .714.358.714.8v14.4c0 .442-.32.8-.714.8H.714a.678.678 0 0 1-.505-.234A.851.851 0 0 1 0 15.2V.8Zm7.143 0c0-.442.32-.8.714-.8h1.429c.19 0 .37.084.505.234.134.15.209.354.209.566v14.4c0 .442-.32.8-.714.8H7.857c-.394 0-.714-.358-.714-.8V.8Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                {
+                  playState?
+                  <svg
+                    className="w-3 h-3 text-white"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 10 16"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M0 .8C0 .358.32 0 .714 0h1.429c.394 0 .714.358.714.8v14.4c0 .442-.32.8-.714.8H.714a.678.678 0 0 1-.505-.234A.851.851 0 0 1 0 15.2V.8Zm7.143 0c0-.442.32-.8.714-.8h1.429c.19 0 .37.084.505.234.134.15.209.354.209.566v14.4c0 .442-.32.8-.714.8H7.857c-.394 0-.714-.358-.714-.8V.8Z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  :
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    className="w-3 h-3 text-white"
+                    viewBox="0 0 16 16"
+                  >
+                    <path
+                      d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"
+                      fill="white"
+                    ></path>
+                  </svg>
+                  
+                }
                 <span className="sr-only">Pause video</span>
               </button>
               <div
@@ -162,11 +175,12 @@ export default function Wavbar({
               <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-800">
                 {/* TODO  進度條寬度設置*/}
                 <div
-                  className={`bg-blue-600 h-1.5 rounded-full w-[${progressBarWidth}%]`}
+                  ref={progressBarElement}
+                  className={`bg-blue-600 h-1.5 rounded-full`}
                 ></div>
               </div>
               <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                {totalProgress}
+                {totalProgress - nowProgress}
               </span>
             </div>
           </div>

@@ -2,9 +2,29 @@
 import React, { useEffect, useRef, useState } from "react";
 import Wavbar from "@/components/WAVbar/wavbar";
 import SentenceCarousel from "@/components/SentenceCarousel/page";
-import SpeakerDropdown from"@/components/SpeakerDropdown/page";
+import SpeakerDropdown from "@/components/SpeakerDropdown/page";
 
 export default function Page({ params }: { params: { storyName: string } }) {
+  //--------------------- 播放進度
+  // 狀態用於監聽播放狀態
+  const [isPlaying, setIsPlaying] = useState(false);
+  // 狀態用於音訊進度
+  const [audioProgress, setaudioProgress] = useState<number>(0);
+  // 狀態用於音訊來源
+  const [audioSrc, setaudioSrc] = useState(
+    "/wav/LittleRedRidingHood/output_004.wav" // init的音訊
+  );
+
+  // 播放/暫停切換的 callback 函數
+  function handlePlayPauseToggle() {
+    setIsPlaying(!isPlaying);
+  }
+  // 處理音訊播放完成的 callback 函數
+  function handleAudioEnded() {
+    setaudioSrc(`/wav/LittleRedRidingHood/output_00${audioProgress + 1}.wav`);
+    setaudioProgress(audioProgress + 1);
+  }
+
   //--------------------- 顯示字幕
   const [storyContent, setStoryContent] = useState<
     Array<string | { sentence: string; sentenceId: number; emotion: string }>
@@ -48,7 +68,10 @@ export default function Page({ params }: { params: { storyName: string } }) {
     });
   }
 
+  
   //--------------------- 情緒列表控制
+  const emoScrollbar = useRef<HTMLDivElement | null>(null);
+
   const emoList = [
     "平靜",
     "期待",
@@ -60,32 +83,26 @@ export default function Page({ params }: { params: { storyName: string } }) {
     "快哭了",
   ];
 
-  //--------------------- 情緒列表控制
-  const speakerList = [
-    "卜學亮",
-    "葉展綸",
-    "高橋李依",
-    "小野大輔",
-    "子安武人",
-  ];
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (emoScrollbar.current) {
+  //     }
+  //   };
 
-  //--------------------- 播放進度 
-  // 狀態用於監聽播放狀態
-  const [isPlaying, setIsPlaying] = useState(false);
-  // 狀態用於音訊進度
-  const [audioProgress, setaudioProgress] = useState<number>(0);
-  // 狀態用於音訊來源
-  const [audioSrc, setaudioSrc] = useState("/wav/LittleRedRidingHood/output_004.wav");
+  //   if (emoScrollbar.current) {
+  //     emoScrollbar.current.addEventListener("scroll", handleScroll);
+  //   }
 
-  // 播放/暫停切換的 callback 函數
-  function handlePlayPauseToggle() {
-    setIsPlaying(!isPlaying);
-  }
-  // 處理音訊播放完成的 callback 函數
-  function handleAudioEnded() {
-    setaudioSrc(`/wav/LittleRedRidingHood/output_00${audioProgress+1}.wav`);
-    setaudioProgress(audioProgress+1);
-  }
+  //   return () => {
+  //     if (emoScrollbar.current) {
+  //       emoScrollbar.current.removeEventListener("scroll", handleScroll);
+  //     }
+  //   };
+  // }, []);
+
+  //--------------------- 語者列表控制
+  const speakerList = ["卜學亮", "葉展綸", "高橋李依", "小野大輔", "子安武人"];
+
 
   return (
     <>
@@ -106,18 +123,26 @@ export default function Page({ params }: { params: { storyName: string } }) {
               </div>
             </div>
             <div className="flex grow bg-white h-0">
-              <SentenceCarousel storyContent={storyContent}></SentenceCarousel>
+              <SentenceCarousel storyContent={storyContent} snapIndex={audioProgress}></SentenceCarousel>
             </div>
-            <div className="flex bg-slate-50 rounded-b-lg w-full gap-8 p-2 snap-mandatory snap-x overflow-x-auto no-scrollbar">
-              <div className="w-full h-full p-2 shrink-0"></div>
-              {emoList.map((emo, index) => (
-                <div key={index} className="snap-center w-fit h-full p-2 shrink-0">
-                  <p className="w-full flex justify-center align-middle">
-                    {emo}
-                  </p>
-                </div>
-              ))}
-              <div className="w-full h-full p-2 shrink-0"></div>
+            <div>
+              <div
+                ref={emoScrollbar}
+                className="flex bg-slate-50 rounded-b-lg w-full gap-8 p-2 snap-mandatory snap-x overflow-x-auto no-scrollbar"
+              >
+                <div className="w-full h-full p-2 shrink-0"></div>
+                {emoList.map((emo, index) => (
+                  <div
+                    key={index}
+                    className="snap-center w-fit h-full p-2 shrink-0 scroll-snap-item"
+                  >
+                    <p className="w-full flex justify-center align-middle">
+                      {emo}
+                    </p>
+                  </div>
+                ))}
+                <div className="w-full h-full p-2 shrink-0"></div>
+              </div>
             </div>
           </div>
         </div>

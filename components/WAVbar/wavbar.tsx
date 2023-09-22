@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { Progress } from "@/components/ui/progress"
 
 interface WavBarProps {
   nowProgress: number;
@@ -19,8 +20,6 @@ export default function Wavbar({
 }: WavBarProps) {
   const [playState, set_playState] = useState(false);
   const audioElement = useRef<HTMLAudioElement | null>(null);
-  const progressBarElement = useRef<HTMLDivElement | null>(null);
-  const [progressBarWidth, setprogressBarWidth] = useState(0);
 
   // 監聽 playState 的變化，並根據其值播放或停止音訊
   useEffect(() => {
@@ -35,7 +34,7 @@ export default function Wavbar({
 
   // 監聽 audioSrc 的變化，當 audioSrc 變化時重新設置音訊來源
   useEffect(() => {
-    if (audioElement.current && progressBarElement.current) {
+    if (audioElement.current) {
       // 停止當前音訊播放
       audioElement.current.pause();
 
@@ -50,11 +49,6 @@ export default function Wavbar({
       if (playState) {
         audioElement.current.play();
       }
-
-      progressBarElement.current.style.width = `${
-        (nowProgress / totalProgress) * 100
-      }%`;
-      // setprogressBarWidth((nowProgress / totalProgress) * 100);
     }
   }, [audioSrc, playState]);
 
@@ -172,13 +166,7 @@ export default function Wavbar({
               <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 {nowProgress}
               </span>
-              <div className="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-800">
-                {/* TODO  進度條寬度設置*/}
-                <div
-                  ref={progressBarElement}
-                  className={`bg-blue-600 h-1.5 rounded-full`}
-                ></div>
-              </div>
+              <Progress value={(nowProgress / totalProgress) * 100} />
               <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 {totalProgress - nowProgress}
               </span>

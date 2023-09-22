@@ -1,14 +1,32 @@
 "use client";
 
-import React, { Component, useState } from "react";
+import React, { Component, useState, useRef } from "react";
 
 interface SentenceProps {
   storyContent: Array<
     string | { sentence: string; sentenceId: number; emotion: string }
   >;
+  snapIndex: number;
 }
 
-export default function SentenceCarousel({ storyContent }: SentenceProps) {
+export default function SentenceCarousel({
+  storyContent,
+  snapIndex,
+}: SentenceProps) {
+  const sentenceScrollbar = useRef<HTMLDivElement | null>(null);
+  const sentenceSnapElements = useRef<Array<HTMLDivElement | null>>([]);
+
+  const targetElement = sentenceSnapElements.current[snapIndex];
+  if (targetElement && sentenceScrollbar.current) {
+    sentenceScrollbar.current.scrollTo({
+      top:
+        targetElement.offsetTop -
+        sentenceScrollbar.current.clientHeight / 2 -
+        targetElement.clientHeight / 2,
+      behavior: "smooth",
+    });
+  }
+
   const storyContentArray = [
     "Once upon a time there was a cute little girl",
     "Anyone who saw the child loved him, but especially the grandmother, who seemed to love him so much that there was nothing he wouldn't give to the child.",
@@ -36,18 +54,23 @@ export default function SentenceCarousel({ storyContent }: SentenceProps) {
   ];
   return (
     <>
-      <div className="scroll-pl-6 snap-y snap-mandatory overflow-y-auto text-slate-800 text-center w-full h-full no-scrollbar">
-        {storyContent.map((text, index) => (
-          <div key={index} id={String(index)} className="snap-center h-fit p-2">
-            {typeof text === "string" ? text : text.sentence}
-          </div>
-        ))}
-
+      <div
+        ref={sentenceScrollbar}
+        id="123123123"
+        className="scroll-pl-6 snap-y snap-mandatory overflow-y-auto text-slate-800 text-center w-full h-full no-scrollbar"
+      >
         {/* FORDEMO */}
         <div className="h-full p-2"></div>
         {storyContentArray.map((text, index) => (
-          <div key={index} id={String(index)} className="snap-center h-fit p-2">
-            {typeof text === "string" ? text : text}
+          <div
+            key={index}
+            id={`sentence-${index}`}
+            ref={(el) => (sentenceSnapElements.current[index] = el)}
+            className={`snap-center h-fit p-2 ${
+              index == snapIndex ? "text-red-600" : ""
+            }`}
+          >
+            {text}
           </div>
         ))}
         <div className="h-full p-2"></div>

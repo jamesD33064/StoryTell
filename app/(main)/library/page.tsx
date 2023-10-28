@@ -9,18 +9,18 @@ interface StoryInfo {
 }
 
 export default function Library() {
-  const [stories, setStories] = useState<StoryInfo[]>([]);
-  useEffect(() => {
-    axios
-      .get("http://140.134.37.23:8000/api/story/getAllStoryInfo") // 使用代理路径
-      .then((response) => {
-        setStories(response.data);
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching stories:", error);
-      });
-  }, []);
+  // const [stories, setStories] = useState<StoryInfo[]>([]);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://140.134.37.23:8000/api/story/getAllStoryInfo") // 使用代理路径
+  //     .then((response) => {
+  //       setStories(response.data);
+  //       console.log(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error fetching stories:", error);
+  //     });
+  // }, []);
 
   return (
     <main className="relative">
@@ -69,7 +69,7 @@ export default function Library() {
             showTag={true}
             link="/library/Cinderella"
           ></LibraryCard>
-          {stories.map((story, index) => (
+          {/* {stories.map((story, index) => (
             <LibraryCard
               key={index}
               id={story._id}
@@ -78,7 +78,7 @@ export default function Library() {
               showTag={true}
               link=""
             ></LibraryCard>
-          ))}
+          ))} */}
         </div>
       </div>
     </main>

@@ -135,7 +135,7 @@ export default function Navbar() {
             type="button"
             className="inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group"
           >
-            <Link href="/library/Cinderella">
+            <Link href="/questionnaire">
               <svg
                 className="w-5 h-5 mb-1 text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"
                 aria-hidden="true"

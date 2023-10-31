@@ -15,18 +15,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-      style={{background: `url('/bg.jpg') center/cover no-repeat fixed`,}}
+        style={{ background: `url('/bg.jpg') center/cover no-repeat fixed` }}
       >
-        {/* <Image
-          alt="bgimg"
-          src={BG}
-          quality={100}
-          fill
-          sizes="100vw"
-          style={{
-            objectFit: "cover",
-          }}
-        /> */}
         {children}
       </body>
     </html>

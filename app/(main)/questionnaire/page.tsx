@@ -7,39 +7,38 @@ import Q0Start from "@/components/Questionnaire/Q0Start/page";
 import Q1 from "@/components/Questionnaire/Q1/page";
 import Q2 from "@/components/Questionnaire/Q2/page";
 import QEnd from "@/components/Questionnaire/QEnd/page";
+import Q3 from "@/components/Questionnaire/Q3/page";
+import { Progress } from "@radix-ui/react-progress";
 
 export default function Questionnaire() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionIndex, _] = useState(0);
+  const [showQuestion, setShowQuestion] = useState(false);
+  const questions = [Q1, Q2, Q3, QEnd];
 
-  const questions = [Q0Start, Q1, Q2, QEnd];
-
-  const CurrentQuestion = questions[currentQuestionIndex];
-
-  const handleLasttQuestion = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex(currentQuestionIndex - 1);
-    }
+  const handleStartQuestion = () => {
+    setShowQuestion(true);
   };
   const handleNextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    }
+    setShowQuestion(true);
   };
 
   return (
-    <main className="fixed flex flex-col w-screen h-full justify-between place-items-center text-center overflow-hidden py-20 px-10">
-      <h1 className="">問卷調查</h1>
-      <div className="h-3/4 w-screen">
-        <CurrentQuestion />
-      </div>
-      <div className="w-screen flex justify-around">
-        <Button variant="outline" onClick={handleLasttQuestion}>
-          上一题
-        </Button>
-        <Button variant="outline" onClick={handleNextQuestion}>
-          下一题
-        </Button>
-      </div>
-    </main>
+    <div className="flex w-screen flex-grow items-center justify-center p-4">
+      {!showQuestion ? (
+        <Q0Start handleStartQuestion={handleStartQuestion}></Q0Start>
+      ) : (
+        <div className="w-full h-full flex items-center gap-4 snap-mandatory snap-x overflow-x-auto px-8">
+          {questions.map((QuestionComponent, index) => (
+            <div
+              key={index}
+              className={`snap-center w-full shrink-0`}
+            >
+              <QuestionComponent />
+            </div>
+          ))}
+          {/* <Progress value={33} /> */}
+        </div>
+      )}
+    </div>
   );
 }

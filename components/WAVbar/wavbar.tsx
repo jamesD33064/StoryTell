@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
-import { Progress } from "@/components/ui/progress"
+import { Progress } from "@/components/ui/progress";
 
 interface WavBarProps {
   nowProgress: number;
@@ -98,8 +98,7 @@ export default function Wavbar({
                 type="button"
                 className="inline-flex items-center justify-center p-2.5 mx-2 font-medium bg-blue-600 rounded-full hover:bg-blue-700 group focus:ring-4 focus:ring-blue-300 focus:outline-none dark:focus:ring-blue-800"
               >
-                {
-                  playState?
+                {playState ? (
                   <svg
                     className="w-3 h-3 text-white"
                     aria-hidden="true"
@@ -113,7 +112,7 @@ export default function Wavbar({
                       clipRule="evenodd"
                     />
                   </svg>
-                  :
+                ) : (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -125,8 +124,7 @@ export default function Wavbar({
                       fill="white"
                     ></path>
                   </svg>
-                  
-                }
+                )}
                 <span className="sr-only">Pause video</span>
               </button>
               <div

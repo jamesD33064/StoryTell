@@ -27,7 +27,7 @@ export default function Questionnaire() {
       {!showQuestion ? (
         <Q0Start handleStartQuestion={handleStartQuestion}></Q0Start>
       ) : (
-        <div className="w-full h-full flex items-center gap-4 snap-mandatory snap-x overflow-x-auto px-8">
+        <div className="w-screen h-full flex items-center gap-4 snap-mandatory snap-x overflow-x-auto z-50">
           {questions.map((QuestionComponent, index) => (
             <div
               key={index}

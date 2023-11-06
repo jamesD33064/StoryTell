@@ -12,7 +12,9 @@ export default function Page({ params }: { params: { storyName: string } }) {
   const [audioProgress, setaudioProgress] = useState<number>(0);
   // 狀態用於音訊來源
   const [audioSrc, setaudioSrc] = useState(
-    "/wav/LittleRedRidingHood/output_004.wav" // init的音訊
+    // FORDEMO
+    `https://storytell-backend.fcuvoice.com/api/story/audio/LittleRedRidingHood/J/Default/434/${audioProgress + 1}` // init的音訊
+    // `https://storytell-backend.fcuvoice.com/wav/LittleRedRidingHood/J/Default/434/${audioProgress + 1}.wav` // init的音訊
   );
 
   // 播放/暫停切換的 callback 函數
@@ -20,19 +22,26 @@ export default function Page({ params }: { params: { storyName: string } }) {
     setIsPlaying(!isPlaying);
   }
   // 處理音訊播放完成的 callback 函數
+    // FORDEMO
   function handleAudioEnded() {
-    setaudioSrc(`/wav/LittleRedRidingHood/output_00${audioProgress + 1}.wav`);
+    // setaudioSrc(`/wav/LittleRedRidingHood/output_00${audioProgress + 1}.wav`);
+    setaudioSrc(`https://storytell-backend.fcuvoice.com/wav/LittleRedRidingHood/J/Default/434/${audioProgress + 2}.wav`);
     setaudioProgress(audioProgress + 1);
   }
 
   //--------------------- 顯示字幕
+  const [storyLength, setStoryLength] = useState<number>(0);
   const [storyContent, setStoryContent] = useState<
-    Array<string | { sentence: string; sentenceId: number; emotion: string }>
+    Array<{
+      sentence: string;
+      sentenceId: number;
+      emotion: string;
+    }>
   >([]);
 
   useEffect(() => {
     const getAllStoryInfo =
-      "http://140.134.37.23:8000/api/story/getAllStoryInfo";
+      "https://storytell-backend.fcuvoice.com/api/story/getAllStoryInfo";
 
     fetch(getAllStoryInfo)
       .then((response) => response.json())
@@ -47,28 +56,32 @@ export default function Page({ params }: { params: { storyName: string } }) {
 
   function fetchStoryDetails(storyIds: string[]) {
     const storyDetailBaseUrl =
-      "http://140.134.37.23:8000/api/story/getStoryDetail/";
+      "https://storytell-backend.fcuvoice.com/api/story/getStoryDetail/";
 
     storyIds.forEach((storyId) => {
       const storyDetailUrl = storyDetailBaseUrl + storyId;
 
       fetch(storyDetailUrl)
         .then((response) => response.json())
-        .then((storyData: { storyContent: string[] }) => {
+        .then((storyData: { storyContent:     Array<{
+          sentence: string;
+          sentenceId: number;
+          emotion: string;
+        }> }) => {
           const storyContent = storyData.storyContent;
-
-          setStoryContent((prevStoryContent) => [
-            ...prevStoryContent,
-            ...storyContent,
-          ]);
-        })
-        .catch((error) => {
-          console.error("發生錯誤：", error);
+          setStoryContent(storyContent);
+          setStoryLength(storyContent.length);
+        //   setStoryContent((prevStoryContent) => [
+        //     ...prevStoryContent,
+        //     ...storyContent,
+        //   ]);
+        // })
+        // .catch((error) => {
+        //   console.error("發生錯誤：", error);
         });
     });
   }
 
-  
   //--------------------- 情緒列表控制
   const emoScrollbar = useRef<HTMLDivElement | null>(null);
 
@@ -103,7 +116,6 @@ export default function Page({ params }: { params: { storyName: string } }) {
   //--------------------- 語者列表控制
   const speakerList = ["卜學亮", "葉展綸", "高橋李依", "小野大輔", "子安武人"];
 
-
   return (
     <>
       <main className="fixed w-screen flex h-screen flex-col align-middle justify-center overflow-hidden">
@@ -117,13 +129,15 @@ export default function Page({ params }: { params: { storyName: string } }) {
               </div>
               <div className="ml-2 mb-2 w-1/3">
                 <div className="w-full flex justify-center align-middle">
-                  {/* FORDEMO */}
                   <SpeakerDropdown speakerList={speakerList}></SpeakerDropdown>
                 </div>
               </div>
             </div>
             <div className="flex grow bg-white h-0">
-              <SentenceCarousel storyContent={storyContent} snapIndex={audioProgress}></SentenceCarousel>
+              <SentenceCarousel
+                storyContent={storyContent}
+                snapIndex={audioProgress}
+              ></SentenceCarousel>
             </div>
             <div>
               <div
@@ -147,10 +161,9 @@ export default function Page({ params }: { params: { storyName: string } }) {
           </div>
         </div>
 
-        {/* FORDEMO */}
         <Wavbar
           nowProgress={audioProgress}
-          totalProgress={10}
+          totalProgress={storyLength}
           audioSrc={audioSrc}
           onPlayPauseToggle={handlePlayPauseToggle}
           onAudioEnded={handleAudioEnded}

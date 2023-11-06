@@ -9,78 +9,49 @@ interface StoryInfo {
 }
 
 export default function Library() {
-  // const [stories, setStories] = useState<StoryInfo[]>([]);
-  // useEffect(() => {
-  //   axios
-  //     .get("http://140.134.37.23:8000/api/story/getAllStoryInfo") // 使用代理路径
-  //     .then((response) => {
-  //       setStories(response.data);
-  //       console.log(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error fetching stories:", error);
-  //     });
-  // }, []);
+  const [stories, setStories] = useState<StoryInfo[]>([]);
+  useEffect(() => {
+    axios
+      .get("https://storytell-backend.fcuvoice.com/api/story/getAllStoryInfo")
+      .then((response) => {
+        setStories(response.data);
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching stories:", error);
+      });
+  }, []);
 
   return (
-    <main className="relative">
-      <div className="w-full h-1/5 flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
-        <div className="snap-center w-3/5 h-full shrink-0">
-          <LibraryCard
-            id="1"
-            storyName="Cinderella"
-            storyImg="https://obs.line-scdn.net/0hMrBADxguEl1_ODknDattCkVuETJMVAFeGw5DXjxWTGkHCAANFAxYM1w9TjpQD1UDEQ5VPF89CWwCDF1bRA1Y/w644"
-            showTag={false}
-            link="/library/Cinderella"
-          ></LibraryCard>
-        </div>
-        <div className="snap-center w-3/5 h-full shrink-0">
-          <LibraryCard
-            id="1"
-            storyName="Cinderella"
-            storyImg="https://obs.line-scdn.net/0hMrBADxguEl1_ODknDattCkVuETJMVAFeGw5DXjxWTGkHCAANFAxYM1w9TjpQD1UDEQ5VPF89CWwCDF1bRA1Y/w644"
-            showTag={false}
-            link="/library/Cinderella"
-          ></LibraryCard>
-        </div>
-        <div className="snap-center w-3/5 h-full shrink-0">
-          <LibraryCard
-            id="1"
-            storyName="Cinderella"
-            storyImg="https://obs.line-scdn.net/0hMrBADxguEl1_ODknDattCkVuETJMVAFeGw5DXjxWTGkHCAANFAxYM1w9TjpQD1UDEQ5VPF89CWwCDF1bRA1Y/w644"
-            showTag={false}
-            link="/library/Cinderella"
-          ></LibraryCard>
-        </div>
-      </div>
-      <div>
-        <div className="w-full flex flex-col align-middle justify-center gap-8 p-6">
-          <LibraryCard
-            id="demo-1"
-            storyName="Little Red Riding Hood"
-            storyImg="https://obs.line-scdn.net/0hMrBADxguEl1_ODknDattCkVuETJMVAFeGw5DXjxWTGkHCAANFAxYM1w9TjpQD1UDEQ5VPF89CWwCDF1bRA1Y/w644"
-            showTag={true}
-            link="/library/LittleRedRidingHood"
-          ></LibraryCard>
-          <LibraryCard
-            id="demo-2"
-            storyName="cinderella"
-            storyImg="https://obs.line-scdn.net/0hMrBADxguEl1_ODknDattCkVuETJMVAFeGw5DXjxWTGkHCAANFAxYM1w9TjpQD1UDEQ5VPF89CWwCDF1bRA1Y/w644"
-            showTag={true}
-            link="/library/Cinderella"
-          ></LibraryCard>
-          {/* {stories.map((story, index) => (
+    <>
+      <div className="w-screen h-1/5 flex gap-8 snap-mandatory snap-x overflow-x-auto p-14">
+        {/* {stories.map((story, index) => (
+          <div className="snap-center w-3/5 h-full shrink-0">
             <LibraryCard
               key={index}
               id={story._id}
               storyName={story.storyName}
-              storyImg="http://140.134.37.23:8000/img/LittleRedRidingHood.png"
-              showTag={true}
-              link=""
+              storyImg=""
+              showTag={false}
+              link={"/library/" + story.storyName}
             ></LibraryCard>
-          ))} */}
+          </div>
+        ))} */}
+      </div>
+      <div>
+        <div className="w-full flex flex-col align-middle justify-center gap-8 p-6">
+          {stories.map((story, index) => (
+            <LibraryCard
+              key={index}
+              id={story._id}
+              storyName={story.storyName}
+              storyImg=""
+              showTag={true}
+              link={"/library/" + story.storyName.replace(/\s/g, "")}
+            ></LibraryCard>
+          ))}
         </div>
       </div>
-    </main>
+    </>
   );
 }

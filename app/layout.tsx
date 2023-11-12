@@ -1,5 +1,5 @@
 import Image from "next/image";
-import BG from "@/public/bg.jpg";
+import bg from "@/public/bg.jpg";
 import "./globals.css";
 
 export const metadata = {

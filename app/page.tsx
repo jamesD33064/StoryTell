@@ -13,11 +13,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-// Component
-import { Component } from "react";
-import Navbar from "@/components/Navbar/navbar";
-// import StoryCard from "@/components/StoryCard/page";
-
 export default function Home() {
   return (
     <>
@@ -60,8 +55,8 @@ export default function Home() {
                 <Link href="/library">Explore</Link>
               </button>
 
-              <div className="flex grow">
-                <div className="animate-bounce py-5 flex justify-center items-center">
+              <div className="flex py-12">
+                <div className="animate-bounce py-8 flex justify-center items-center">
                   <svg
                     className="w-6 h-6 text-violet-500"
                     fill="none"

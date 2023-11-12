@@ -6,6 +6,7 @@ import LibraryCard from "@/components/LibraryCard/page";
 interface StoryInfo {
   _id: string;
   storyName: string;
+  storyImg: string;
 }
 
 export default function Library() {
@@ -45,13 +46,18 @@ export default function Library() {
               key={index}
               id={story._id}
               storyName={story.storyName}
-              storyImg=""
+              storyImg={
+                "https://storytell-backend.fcuvoice.com/img/" +
+                story.storyImg +
+                ".png"
+              }
               showTag={true}
-              link={"/library/" + story.storyName.replace(/\s/g, "")}
+              link={"/library/" + story._id}
             ></LibraryCard>
           ))}
         </div>
       </div>
+      <div className="pb-12"></div>
     </>
   );
 }

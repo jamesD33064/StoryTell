@@ -5,8 +5,10 @@ import Wavbar from "@/components/WAVbar/wavbar";
 import SentenceCarousel from "@/components/SentenceCarousel/page";
 import SpeakerDropdown from "@/components/SpeakerDropdown/page";
 import { SpeakerConstant } from "@/Constants/SpeakerConstant";
+import SentenceCarouselLoaded from "@/components/SentenceCarousel/Loaded/page";
 
 export default function Page({ params }: { params: { storyName: string } }) {
+  const [loaded, setLoaded] = useState(false);
   //--------------------- 取得故事資訊, init故事參數
   const [storyLength, setStoryLength] = useState<number>(0);
   const [storyName, setStoryName] = useState("");
@@ -36,6 +38,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
     axios
       .get(url)
       .then((response) => {
+        setLoaded(true);
         const storyData = response.data;
         setStoryName(storyData.storyName);
         setStoryLang(storyData.storyLang);
@@ -143,10 +146,14 @@ export default function Page({ params }: { params: { storyName: string } }) {
               </div>
             </div>
             <div className="flex grow bg-white h-0">
-              <SentenceCarousel
-                storyContent={storyContent}
-                snapIndex={audioProgress}
-              ></SentenceCarousel>
+              {!loaded ? (
+                <SentenceCarouselLoaded />
+              ) : (
+                <SentenceCarousel
+                  storyContent={storyContent}
+                  snapIndex={audioProgress}
+                ></SentenceCarousel>
+              )}
             </div>
             <div>
               <div

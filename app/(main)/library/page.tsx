@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import LibraryCard from "@/components/LibraryCard/page";
+import LibraryCardLoaded from "@/components/LibraryCard/Loaded/page";
 
 interface StoryInfo {
   _id: string;
@@ -10,13 +11,15 @@ interface StoryInfo {
 }
 
 export default function Library() {
+  const [loaded, setLoaded] = useState(false);
   const [stories, setStories] = useState<StoryInfo[]>([]);
   useEffect(() => {
     axios
       .get("https://storytell-backend.fcuvoice.com/api/story/getAllStoryInfo")
       .then((response) => {
         setStories(response.data);
-        console.log(response.data);
+        // console.log(response.data);
+        setLoaded(true);
       })
       .catch((error) => {
         console.error("Error fetching stories:", error);
@@ -41,20 +44,22 @@ export default function Library() {
       </div>
       <div>
         <div className="w-full flex flex-col align-middle justify-center gap-8 p-6">
-          {stories.map((story, index) => (
-            <LibraryCard
-              key={index}
-              id={story._id}
-              storyName={story.storyName}
-              storyImg={
-                "https://storytell-backend.fcuvoice.com/img/" +
-                story.storyImg +
-                ".png"
-              }
-              showTag={true}
-              link={"/library/" + story._id}
-            ></LibraryCard>
-          ))}
+          {!loaded
+            ? <LibraryCardLoaded />
+            : stories.map((story, index) => (
+                <LibraryCard
+                  key={index}
+                  id={story._id}
+                  storyName={story.storyName}
+                  storyImg={
+                    "https://storytell-backend.fcuvoice.com/img/" +
+                    story.storyImg +
+                    ".png"
+                  }
+                  showTag={true}
+                  link={"/library/" + story._id}
+                ></LibraryCard>
+              ))}
         </div>
       </div>
       <div className="pb-12"></div>

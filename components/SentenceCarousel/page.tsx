@@ -1,6 +1,19 @@
 "use client";
 
 import React, { Component, useState, useRef } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Emotion2EmojiConstant,
+  Emoji2EmotionConstant,
+  Emoji2ChineseConstant,
+} from "@/Constants/EmotionEmojiConstant";
+import { Separator } from "@/components/ui/separator";
 
 interface SentenceProps {
   storyContent: Array<{
@@ -9,11 +22,13 @@ interface SentenceProps {
     emotion: string;
   }>;
   snapIndex: number;
+  onSentenceEmotion: (emotion: string, sentenceId:number) => void;
 }
 
 export default function SentenceCarousel({
   storyContent,
   snapIndex,
+  onSentenceEmotion,
 }: SentenceProps) {
   const sentenceScrollbar = useRef<HTMLDivElement | null>(null);
   const sentenceSnapElements = useRef<Array<HTMLDivElement | null>>([]);
@@ -41,13 +56,46 @@ export default function SentenceCarousel({
             key={index}
             id={`sentence-${index}`}
             ref={(el) => (sentenceSnapElements.current[index] = el)}
-            className={`snap-center h-fit p-2 ${
+            className={`snap-center flex flex-col align-middle ${
               index === snapIndex ? "text-red-600" : ""
             }`}
           >
-            {typeof text === "string"
-              ? text
-              : (text as { sentence: string }).sentence}
+            <span className="flex">
+              <span className="p-2">
+                <Select onValueChange={(e) => onSentenceEmotion(e, index)}>
+                  <SelectTrigger>
+                    <SelectValue
+                      placeholder={
+                        Emotion2EmojiConstant[
+                          typeof text === "string"
+                            ? text
+                            : (text as { emotion: string }).emotion
+                        ]
+                      }
+                    />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {Object.keys(Emoji2EmotionConstant).map(
+                      (emoji, E2Eindex) => (
+                        <SelectItem
+                          key={E2Eindex}
+                          value={Emoji2EmotionConstant[emoji]}
+                        >
+                          {emoji}
+                          {/* {emoji + Emoji2ChineseConstant[emoji]} */}
+                        </SelectItem>
+                      )
+                    )}
+                  </SelectContent>
+                </Select>
+              </span>
+              <div className="h-fit p-2">
+                {typeof text === "string"
+                  ? text
+                  : (text as { sentence: string }).sentence}
+              </div>
+            </span>
+            <Separator className="my-2" />
           </div>
         ))}
         <div className="h-full p-2"></div>

@@ -18,7 +18,6 @@ export default function Library() {
       .get("https://storytell-backend.fcuvoice.com/api/story/getAllStoryInfo")
       .then((response) => {
         setStories(response.data);
-        // console.log(response.data);
         setLoaded(true);
       })
       .catch((error) => {

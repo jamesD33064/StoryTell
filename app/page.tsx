@@ -2,6 +2,9 @@
 
 import Head from "next/head";
 import Image from "next/image";
+import { EnterIcon } from "@radix-ui/react-icons";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import {
   Table,
@@ -51,9 +54,12 @@ export default function Home() {
                 </p>
               </div>
 
-              <button className="flex rounded-full px-5 py-1 bg-white hover:bg-slate-100 text-sm border-solid border border-slate-300">
-                <Link href="/library">Explore</Link>
-              </button>
+              <Link href="/library">
+                <Button variant="outline">
+                  Explore
+                  <EnterIcon className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
 
               <div className="flex py-12">
                 <div className="animate-bounce py-8 flex justify-center items-center">
@@ -99,12 +105,16 @@ export default function Home() {
           </div>
 
           {/* snap page3 */}
-          <div className="snap-center h-screen pt-24">
-            <div className="grid h-full">
-              <h1 className="grid place-content-center text-2xl font-serif">
-                Snap 3
-              </h1>
-              <div className="grid">{/* <StoryCard></StoryCard> */}</div>
+          <div className="snap-center h-screen flex flex-col justify-center align-middle">
+            <div className="w-full">
+              <AspectRatio ratio={1 / 1}>
+                <Image
+                  src="/QRcode.png"
+                  alt="Image"
+                  className="rounded-md object-cover"
+                  fill
+                />
+              </AspectRatio>
             </div>
           </div>
         </div>

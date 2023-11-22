@@ -4,7 +4,7 @@ import axios from "axios";
 import Wavbar from "@/components/WAVbar/wavbar";
 import SentenceCarousel from "@/components/SentenceCarousel/page";
 import SpeakerDropdown from "@/components/SpeakerDropdown/page";
-import { SpeakerConstant } from "@/Constants/SpeakerConstant";
+import { SpeakerConstant, JSpeakerConstant, CSpeakerConstant } from "@/Constants/SpeakerConstant";
 import SentenceCarouselLoaded from "@/components/SentenceCarousel/Loaded/page";
 import useLocalStorage from "@/CustomHook/localstorage";
 
@@ -55,15 +55,9 @@ export default function Page({ params }: { params: { storyName: string } }) {
       setStoryLang(storyData.storyLang);
 
       if (storyData.storyLang === "J") {
-        setSpeakerList([
-          "預設女聲",
-          "輝夜姬白銀",
-          "子安武人",
-          "約爾夫人",
-          "高橋羽依",
-        ]);
+        setSpeakerList(JSpeakerConstant);
       } else {
-        setSpeakerList(["預設女聲", "沈睡小五郎", "廣志", "麗子"]);
+        setSpeakerList(CSpeakerConstant);
       }
 
       const storyContent =
@@ -168,6 +162,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
                 <SentenceCarousel
                   storyContent={storyContent}
                   snapIndex={audioProgress}
+                  storyLang={storyLang}
                   onSentenceEmotion={handleSentenceEmotion}
                 ></SentenceCarousel>
               )}

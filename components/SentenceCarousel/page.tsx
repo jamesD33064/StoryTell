@@ -10,7 +10,8 @@ import {
 } from "@/components/ui/select";
 import {
   Emotion2EmojiConstant,
-  Emoji2EmotionConstant,
+  JEmoji2ValueConstant,
+  CEmoji2ValueConstant,
   Emoji2ChineseConstant,
 } from "@/Constants/EmotionEmojiConstant";
 import { Separator } from "@/components/ui/separator";
@@ -22,12 +23,14 @@ interface SentenceProps {
     emotion: string;
   }>;
   snapIndex: number;
-  onSentenceEmotion: (emotion: string, sentenceId:number) => void;
+  storyLang: string;
+  onSentenceEmotion: (emotion: string, sentenceId: number) => void;
 }
 
 export default function SentenceCarousel({
   storyContent,
   snapIndex,
+  storyLang,
   onSentenceEmotion,
 }: SentenceProps) {
   const sentenceScrollbar = useRef<HTMLDivElement | null>(null);
@@ -75,11 +78,11 @@ export default function SentenceCarousel({
                     />
                   </SelectTrigger>
                   <SelectContent>
-                    {Object.keys(Emoji2EmotionConstant).map(
+                    {Object.keys((storyLang=="J"?JEmoji2ValueConstant:CEmoji2ValueConstant)).map(
                       (emoji, E2Eindex) => (
                         <SelectItem
                           key={E2Eindex}
-                          value={Emoji2EmotionConstant[emoji]}
+                          value={(storyLang=="J"?JEmoji2ValueConstant:CEmoji2ValueConstant)[emoji]}
                         >
                           {emoji}
                           {/* {emoji + Emoji2ChineseConstant[emoji]} */}

@@ -134,6 +134,15 @@ export default function Page({ params }: { params: { storyName: string } }) {
   // 處理更換語者的 callback 函數
   function handleSpeaker(speakerName: string) {
     setSpeaker(speakerName);
+
+    setAudioSrc(
+      buildAudioSrc(
+        storyLang,
+        SpeakerConstant[speakerName],
+        sentenceEmotion,
+        audioProgress+1
+      )
+    );
   }
 
   //--------------------- 顯示頁面

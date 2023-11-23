@@ -9,6 +9,7 @@ export const SpeakerConstant: { [key: string]: string } = {
   派大星: "Patrick",
   秋本麗子: "Lizi",
   多拉A夢: "Doraemon",
+  亞洲統神: "Tone",
 };
 
 export const JSpeakerConstant: string[] = [
@@ -26,4 +27,5 @@ export const CSpeakerConstant: string[] = [
   "派大星",
   "秋本麗子",
   "多拉A夢",
+  "亞洲統神",
 ];

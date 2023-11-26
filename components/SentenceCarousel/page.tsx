@@ -24,6 +24,7 @@ interface SentenceProps {
   }>;
   snapIndex: number;
   storyLang: string;
+  isEmoMode: boolean;
   onSentenceEmotion: (emotion: string, sentenceId: number) => void;
 }
 
@@ -31,6 +32,7 @@ export default function SentenceCarousel({
   storyContent,
   snapIndex,
   storyLang,
+  isEmoMode,
   onSentenceEmotion,
 }: SentenceProps) {
   const sentenceScrollbar = useRef<HTMLDivElement | null>(null);
@@ -64,34 +66,44 @@ export default function SentenceCarousel({
             }`}
           >
             <span className="flex">
-              <span className="p-2">
-                <Select onValueChange={(e) => onSentenceEmotion(e, index)}>
-                  <SelectTrigger>
-                    <SelectValue
-                      placeholder={
-                        Emotion2EmojiConstant[
-                          typeof text === "string"
-                            ? text
-                            : (text as { emotion: string }).emotion
-                        ]
-                      }
-                    />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {Object.keys((storyLang=="J"?JEmoji2ValueConstant:CEmoji2ValueConstant)).map(
-                      (emoji, E2Eindex) => (
+              {isEmoMode ? (
+                <span className="p-2">
+                  <Select onValueChange={(e) => onSentenceEmotion(e, index)}>
+                    <SelectTrigger>
+                      <SelectValue
+                        placeholder={
+                          Emotion2EmojiConstant[
+                            typeof text === "string"
+                              ? text
+                              : (text as { emotion: string }).emotion
+                          ]
+                        }
+                      />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.keys(
+                        storyLang == "J"
+                          ? JEmoji2ValueConstant
+                          : CEmoji2ValueConstant
+                      ).map((emoji, E2Eindex) => (
                         <SelectItem
                           key={E2Eindex}
-                          value={(storyLang=="J"?JEmoji2ValueConstant:CEmoji2ValueConstant)[emoji]}
+                          value={
+                            (storyLang == "J"
+                              ? JEmoji2ValueConstant
+                              : CEmoji2ValueConstant)[emoji]
+                          }
                         >
                           {emoji}
                           {/* {emoji + Emoji2ChineseConstant[emoji]} */}
                         </SelectItem>
-                      )
-                    )}
-                  </SelectContent>
-                </Select>
-              </span>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </span>
+              ) : (
+                ""
+              )}
               <div className="h-fit p-2">
                 {typeof text === "string"
                   ? text

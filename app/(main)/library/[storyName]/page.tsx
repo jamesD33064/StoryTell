@@ -1,10 +1,20 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+  useEffect,
+  useRef,
+  useState,
+  createContext,
+  useContext,
+} from "react";
 import axios from "axios";
 import Wavbar from "@/components/WAVbar/wavbar";
 import SentenceCarousel from "@/components/SentenceCarousel/page";
 import SpeakerDropdown from "@/components/SpeakerDropdown/page";
-import { SpeakerConstant, JSpeakerConstant, CSpeakerConstant } from "@/Constants/SpeakerConstant";
+import {
+  SpeakerConstant,
+  JSpeakerConstant,
+  CSpeakerConstant,
+} from "@/Constants/SpeakerConstant";
 import SentenceCarouselLoaded from "@/components/SentenceCarousel/Loaded/page";
 import useLocalStorage from "@/CustomHook/localstorage";
 
@@ -32,12 +42,21 @@ export default function Page({ params }: { params: { storyName: string } }) {
 
   // 狀態用於監聽播放狀態
   const [isPlaying, setIsPlaying] = useState(false);
+  // 狀態用於情緒狀態
+  const [isEmoMode, setIsEmoMode] = useState(true);
   // 狀態用於音訊進度
   const [audioProgress, setaudioProgress] = useState<number>(0);
   // 狀態用於音訊來源
   const [audioSrc, setAudioSrc] = useState("");
 
-  const buildAudioSrc = (L: string, S: string, E: string, P: number) => {
+  const buildAudioSrc = (
+    L: string,
+    S: string,
+    E: string,
+    P: number,
+    isEmoMode: boolean
+  ) => {
+    E = isEmoMode ? E : L === "J" ? "434" : "6234";
     return `https://storytell-backend.fcuvoice.com/wav/LittleRedRidingHood/${L}/${S}/${E}/${P}.wav`;
   };
 
@@ -76,7 +95,8 @@ export default function Page({ params }: { params: { storyName: string } }) {
           storyData.storyLang,
           SpeakerConstant["預設女聲"],
           sentenceEmotion,
-          1
+          1,
+          true
         )
       );
     } catch (error) {
@@ -99,7 +119,13 @@ export default function Page({ params }: { params: { storyName: string } }) {
     const p = audioProgress + 2;
 
     setAudioSrc(
-      buildAudioSrc(storyLang, SpeakerConstant[speaker], sentenceEmotion, p)
+      buildAudioSrc(
+        storyLang,
+        SpeakerConstant[speaker],
+        sentenceEmotion,
+        p,
+        true
+      )
     );
 
     if (storyContent[p + 1] && storyContent[p + 1].emotion)
@@ -124,9 +150,24 @@ export default function Page({ params }: { params: { storyName: string } }) {
         storyLang,
         SpeakerConstant[speaker],
         newContent[audioProgress].emotion,
-        audioProgress+1
+        audioProgress + 1,
+        true
       )
     );
+  }
+
+  // 切換情緒模式的 callback 函數
+  function handleEmotionToggle() {
+    setAudioSrc(
+      buildAudioSrc(
+        storyLang,
+        SpeakerConstant[speaker],
+        sentenceEmotion,
+        audioProgress + 1,
+        !isEmoMode
+      )
+    );
+    setIsEmoMode(!isEmoMode);
   }
 
   //--------------------- 語者列表控制
@@ -140,7 +181,8 @@ export default function Page({ params }: { params: { storyName: string } }) {
         storyLang,
         SpeakerConstant[speakerName],
         sentenceEmotion,
-        audioProgress+1
+        audioProgress + 1,
+        true
       )
     );
   }
@@ -164,6 +206,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
                 </div>
               </div>
             </div>
+
             <div className="flex grow bg-white h-0">
               {!loaded ? (
                 <SentenceCarouselLoaded />
@@ -172,6 +215,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
                   storyContent={storyContent}
                   snapIndex={audioProgress}
                   storyLang={storyLang}
+                  isEmoMode={isEmoMode}
                   onSentenceEmotion={handleSentenceEmotion}
                 ></SentenceCarousel>
               )}
@@ -184,6 +228,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
           totalProgress={storyLength}
           audioSrc={audioSrc}
           onPlayPauseToggle={handlePlayPauseToggle}
+          onEmotionToggle={handleEmotionToggle}
           onAudioEnded={handleAudioEnded}
         ></Wavbar>
       </main>

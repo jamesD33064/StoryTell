@@ -56,7 +56,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
     P: number,
     isEmoMode: boolean
   ) => {
-    E = isEmoMode ? E : L === "J" ? "434" : "6234";
+    E = isEmoMode ? E : L == "J" ? "434" : "6234";
     return `https://storytell-backend.fcuvoice.com/wav/LittleRedRidingHood/${L}/${S}/${E}/${P}.wav`;
   };
 
@@ -124,7 +124,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
         SpeakerConstant[speaker],
         sentenceEmotion,
         p,
-        true
+        isEmoMode
       )
     );
 

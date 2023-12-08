@@ -95,4 +95,9 @@
       scrollbar-width: none; /* Firefox */
     }
   }
+
+  input,
+  textarea {
+    font-size: initial;
+  }
 }

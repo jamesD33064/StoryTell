@@ -1,6 +1,5 @@
 "use client";
 
-import Head from "next/head";
 import Image from "next/image";
 import { EnterIcon } from "@radix-ui/react-icons";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -19,15 +18,6 @@ import {
 export default function Home() {
   return (
     <>
-      <Head>
-        <title>Story Tell</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
-        ></meta>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className="fixed w-screen flex h-screen flex-col justify-center overflow-hidden">
         {/* 最外層snap */}
         <div className="snap-mandatory snap-y overflow-y-auto h-screen px-4">
@@ -38,18 +28,20 @@ export default function Home() {
                 <h1 className="py-5 text-center text-4xl font-serif leading-relaxed">
                   歡迎使用
                   <br />
-                  Story Tell
+                  Story Teller
                 </h1>
                 <p className="font-serif place-content-center py-5">
                   這裡是我們的畢業專題
                   <br />
-                  TTS是基於sovits達成
+                  情緒分析使用text2Emotion套件計算
                   <br />
-                  情緒風格的轉換是基於vits達成
+                  情緒語音合成使用Emotional VITS
                   <br />
-                  前端使用NEXTJS 13、tailwindcss
+                  語者轉換是基於RVC實現
                   <br />
-                  後端預計使用LARAVEL
+                  前端使用NEXTJS 13架設於Vervel
+                  <br />
+                  後端使用LARAVEL及flask建立
                   <br />
                 </p>
               </div>
@@ -82,7 +74,7 @@ export default function Home() {
           {/* snap page2 */}
           <div className="snap-center h-screen pt-24">
             <div className="flex flex-col justify-center items-center">
-              <Table>
+              {/* <Table>
                 <TableCaption>A list of your recent invoices.</TableCaption>
                 <TableHeader>
                   <TableRow>
@@ -100,7 +92,7 @@ export default function Home() {
                     <TableCell className="text-right">$250.00</TableCell>
                   </TableRow>
                 </TableBody>
-              </Table>
+              </Table> */}
             </div>
           </div>
 

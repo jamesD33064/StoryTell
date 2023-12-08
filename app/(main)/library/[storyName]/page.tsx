@@ -79,6 +79,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
         setSpeakerList(CSpeakerConstant);
       }
 
+      // 如果曾經有過更改故事設定
       const storyContent =
         localStoryContent == ""
           ? storyData.storyContent
@@ -86,7 +87,9 @@ export default function Page({ params }: { params: { storyName: string } }) {
       setStoryContent(storyContent);
 
       const sentenceEmotion = storyContent[0].emotion;
-      setSentenceEmotion(storyContent[1].emotion);
+      storyContent.length > 1
+        ? setSentenceEmotion(storyContent[1].emotion)
+        : setSentenceEmotion(sentenceEmotion);
       setStoryLength(storyContent.length);
 
       // init的音訊

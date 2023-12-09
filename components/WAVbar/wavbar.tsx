@@ -11,6 +11,8 @@ interface WavBarProps {
   nowProgress: number;
   totalProgress: number;
   audioSrc: string;
+  onAudioProgressIncress: () => void;
+  onAudioProgressDecress: () => void;
   onPlayPauseToggle: () => void; // 增加播放/暫停切換的 callback 函數
   onEmotionToggle: () => void; // 情緒模式切換的 callback 函數
   onAudioEnded: () => void; // 增加音訊播放完成的 callback 函數
@@ -20,6 +22,8 @@ export default function Wavbar({
   nowProgress,
   totalProgress,
   audioSrc,
+  onAudioProgressIncress,
+  onAudioProgressDecress,
   onPlayPauseToggle,
   onEmotionToggle,
   onAudioEnded,
@@ -82,6 +86,7 @@ export default function Wavbar({
                   data-tooltip-target="tooltip-previous"
                   type="button"
                   className="p-2.5 group rounded-full hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-600 dark:hover:bg-gray-600"
+                  onClick={onAudioProgressDecress}
                 >
                   <svg
                     className="w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -149,6 +154,7 @@ export default function Wavbar({
                   data-tooltip-target="tooltip-next"
                   type="button"
                   className="p-2.5 group rounded-full hover:bg-gray-100 mr-1 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-600 dark:hover:bg-gray-600"
+                  onClick={onAudioProgressIncress}
                 >
                   <svg
                     className="w-4 h-4 text-gray-500 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -178,11 +184,17 @@ export default function Wavbar({
             </div>
             <div className="flex items-center justify-between space-x-2">
               <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                {nowProgress}
+                {(playState ? nowProgress + 1 : nowProgress)}
               </span>
-              <Progress value={(nowProgress / totalProgress) * 100} />
+              <Progress
+                value={
+                  ((playState ? nowProgress + 1 : nowProgress) /
+                    totalProgress) *
+                  100
+                }
+              />
               <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
-                {totalProgress - nowProgress}
+                {totalProgress - (playState ? nowProgress + 1 : nowProgress)}
               </span>
             </div>
           </div>

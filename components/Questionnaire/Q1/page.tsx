@@ -13,13 +13,8 @@ export default function Q1() {
             你覺得下面這段語音像機器合成的嗎？
           </h2>
           <div>
-            {/* <audio
-              src="./wav/LittleRedRidingHood/output_000.wav"
-              className="w-full p-2"
-              controls
-            ></audio> */}
             <audio
-              src="./wav/LittleRedRidingHood/output_000.wav"
+              src="./wav/problem/p1.wav"
               className="w-full p-2"
               controls
             ></audio>

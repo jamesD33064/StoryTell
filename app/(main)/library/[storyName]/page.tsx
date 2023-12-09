@@ -56,6 +56,14 @@ export default function Page({ params }: { params: { storyName: string } }) {
     P: number,
     isEmoMode: boolean
   ) => {
+    if (storyLength + 1 < P) {
+      setaudioProgress(storyLength + 1);
+      P = storyLength + 1;
+    } else if (P < 1) {
+      setaudioProgress(0);
+      P = 1;
+    }
+
     E = isEmoMode ? E : L == "J" ? "434" : "6234";
     return `https://storytell-backend.fcuvoice.com/wav/LittleRedRidingHood/${L}/${S}/${E}/${P}.wav`;
   };
@@ -117,23 +125,53 @@ export default function Page({ params }: { params: { storyName: string } }) {
   function handlePlayPauseToggle() {
     setIsPlaying(!isPlaying);
   }
+
+  // 播放/暫停切換的 callback 函數
+  function handleAudioProgressIncress() {
+    var p = audioProgress + 1;
+    p = p > storyLength - 1 ? storyLength - 1 : p;
+    setAudioSrc(
+      buildAudioSrc(
+        storyLang,
+        SpeakerConstant[speaker],
+        storyContent[p].emotion,
+        storyContent[p].sentenceId + 1,
+        isEmoMode
+      )
+    );
+    setaudioProgress(p);
+  }
+  function handleAudioProgressDecress() {
+    var p = audioProgress - 1;
+    p = p < 0 ? 0 : p;
+    setAudioSrc(
+      buildAudioSrc(
+        storyLang,
+        SpeakerConstant[speaker],
+        storyContent[p].emotion,
+        storyContent[p].sentenceId + 1,
+        isEmoMode
+      )
+    );
+    setaudioProgress(p);
+  }
+
   // 處理音訊播放完成的 callback 函數
   function handleAudioEnded() {
-    const p = audioProgress + 2;
+    var p = audioProgress + 1;
+    p = p >= storyLength ? storyLength - 1 : p;
 
     setAudioSrc(
       buildAudioSrc(
         storyLang,
         SpeakerConstant[speaker],
-        sentenceEmotion,
-        p,
+        storyContent[p] ? storyContent[p].emotion : "",
+        storyContent[p] ? storyContent[p].sentenceId + 1 : storyLength,
         isEmoMode
       )
     );
 
-    if (storyContent[p + 1] && storyContent[p + 1].emotion)
-      setSentenceEmotion(storyContent[p + 1].emotion);
-    setaudioProgress(audioProgress + 1);
+    setaudioProgress(p);
   }
 
   //--------------------- 情緒列表控制
@@ -230,6 +268,8 @@ export default function Page({ params }: { params: { storyName: string } }) {
           nowProgress={audioProgress}
           totalProgress={storyLength}
           audioSrc={audioSrc}
+          onAudioProgressIncress={handleAudioProgressIncress}
+          onAudioProgressDecress={handleAudioProgressDecress}
           onPlayPauseToggle={handlePlayPauseToggle}
           onEmotionToggle={handleEmotionToggle}
           onAudioEnded={handleAudioEnded}

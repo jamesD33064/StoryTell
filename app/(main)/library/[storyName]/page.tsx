@@ -65,7 +65,8 @@ export default function Page({ params }: { params: { storyName: string } }) {
     }
 
     E = isEmoMode ? E : L == "J" ? "434" : "6234";
-    return `https://storytell-backend.fcuvoice.com/wav/LittleRedRidingHood/${L}/${S}/${E}/${P}.wav`;
+
+    return `https://storytell-backend.fcuvoice.com/wav/${params.storyName}/${S}/${E}/${P}.wav`;
   };
 
   const url =

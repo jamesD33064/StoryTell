@@ -72,31 +72,6 @@ export default function Home() {
           </div>
 
           {/* snap page2 */}
-          <div className="snap-center h-screen pt-24">
-            <div className="flex flex-col justify-center items-center">
-              {/* <Table>
-                <TableCaption>A list of your recent invoices.</TableCaption>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[100px]">Invoice</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">INV001</TableCell>
-                    <TableCell>Paid</TableCell>
-                    <TableCell>Credit Card</TableCell>
-                    <TableCell className="text-right">$250.00</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table> */}
-            </div>
-          </div>
-
-          {/* snap page3 */}
           <div className="snap-center h-screen flex flex-col justify-center align-middle">
             <div className="w-full">
               <AspectRatio ratio={1 / 1}>
@@ -109,8 +84,82 @@ export default function Home() {
               </AspectRatio>
             </div>
           </div>
+          {/* snap page3 */}
+          <div className="snap-center h-screen pt-10">
+            <div className="flex flex-col justify-center items-center">
+              <div className="my-2 p-4 bg-sky-500/25 text-center w-1/2 rounded-md">
+                <p>情緒分析</p>
+                </div>
+                <svg
+                    className="w-6 h-6 text-violet-500"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="4"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                  </svg>
+               <div className="my-4 p-4 bg-sky-500/25 text-center w-1/2 rounded-md">
+               <p>情緒語音生成 </p>
+               </div>
+               <svg
+                    className="w-6 h-6 text-violet-500"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="4"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                  </svg>
+              <div className="my-4 p-4 bg-sky-500/25 text-center w-1/2 rounded-md">
+              <p>語者轉換</p>
+              </div>
+               <Table>
+                <TableCaption className="font-medium">訓訓練成果對比表</TableCaption>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[75px]"></TableHead>
+                    <TableHead>訓練方式</TableHead>
+                    <TableHead>訓練成果</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-medium">單一</TableCell>
+                    <TableCell>遊戲角色派蒙</TableCell>
+                    <TableCell>咬字清楚，情緒豐富，口音不像台灣口音</TableCell>    
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium"></TableCell>
+                    <TableCell>佳佳老師</TableCell>
+                    <TableCell>咬字不太正確，情緒稍弱，口音像台灣口音</TableCell>    
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">資料來源</TableCell>
+                    <TableCell>組員之中文資料集</TableCell>
+                    <TableCell>咬字清楚，情緒非常弱，口音像台灣口音</TableCell>    
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">多項</TableCell>
+                    <TableCell>派蒙遷移至佳佳老師</TableCell>
+                    <TableCell>比單一資料來源佳佳老師有提升，但咬字模糊且發音不正確，口音像台灣口音</TableCell>    
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">資料來源</TableCell>
+                    <TableCell>派蒙遷移至組員資料集</TableCell>
+                    <TableCell>咬字不太正確，情緒稍弱，口音像台灣口音</TableCell>    
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </div>
+          </div>
         </div>
       </main>
     </>
   );
 }
+

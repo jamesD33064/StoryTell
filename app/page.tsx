@@ -118,43 +118,42 @@ export default function Home() {
               <div className="my-4 p-4 bg-sky-500/25 text-center w-1/2 rounded-md">
               <p>語者轉換</p>
               </div>
-               <Table>
-                <TableCaption className="font-medium">訓訓練成果對比表</TableCaption>
+              <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[75px]"></TableHead>
-                    <TableHead>訓練方式</TableHead>
                     <TableHead>訓練成果</TableHead>
+                    <TableHead>demo</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow>
-                    <TableCell className="font-medium">單一</TableCell>
-                    <TableCell>遊戲角色派蒙</TableCell>
-                    <TableCell>咬字清楚，情緒豐富，口音不像台灣口音</TableCell>    
+                    <TableCell className="w-[120px] h-[60px]">無情緒語句</TableCell>
+                    <TableCell className="w-[160px] ">無</TableCell>
+                    <TableCell>demo</TableCell>    
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-medium"></TableCell>
-                    <TableCell>佳佳老師</TableCell>
-                    <TableCell>咬字不太正確，情緒稍弱，口音像台灣口音</TableCell>    
+                    <TableCell className="h-[80px]">情緒語音生成</TableCell>
+                    <TableCell>賦予情緒風格且維持自然度</TableCell>
+                    <TableCell>demo</TableCell>    
                   </TableRow>
                   <TableRow>
-                    <TableCell className="font-medium">資料來源</TableCell>
-                    <TableCell>組員之中文資料集</TableCell>
-                    <TableCell>咬字清楚，情緒非常弱，口音像台灣口音</TableCell>    
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">多項</TableCell>
-                    <TableCell>派蒙遷移至佳佳老師</TableCell>
-                    <TableCell>比單一資料來源佳佳老師有提升，但咬字模糊且發音不正確，口音像台灣口音</TableCell>    
-                  </TableRow>
-                  <TableRow>
-                    <TableCell className="font-medium">資料來源</TableCell>
-                    <TableCell>派蒙遷移至組員資料集</TableCell>
-                    <TableCell>咬字不太正確，情緒稍弱，口音像台灣口音</TableCell>    
+                    <TableCell className="h-[80px]">語者轉換</TableCell>
+                    <TableCell>帶入角色聲音特徵且維持情緒表現與自然度</TableCell>
+                    <TableCell>demo</TableCell>    
                   </TableRow>
                 </TableBody>
               </Table>
+              <div className="flex flex-col">
+              <h1 className="py-5 text-center text-2xl font-serif leading-relaxed">
+                  訓練流程分析表
+                  <br />
+                </h1>
+                <p className="font-serif place-content-center py-5">
+                  此表可得知經過不同階段處理造成的音訊變化
+                  <br />
+                </p>
+              </div>
             </div>
           </div>
         </div>

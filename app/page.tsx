@@ -85,13 +85,13 @@ export default function Home() {
             </div>
           </div>
           {/* snap page3 */}
-          <div className="snap-center h-screen pt-10">
+          <div className="snap-center h-screen pt-4">
             <div className="flex flex-col justify-center items-center">
-              <div className="my-2 p-4 bg-sky-500/25 text-center w-1/2 rounded-md">
+              <div className="my-2 p-2 bg-sky-500/25 text-center w-1/2 rounded-md">
                 <p>情緒分析</p>
                 </div>
                 <svg
-                    className="w-6 h-6 text-violet-500"
+                    className="w-4 h-4 text-violet-500"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -101,11 +101,11 @@ export default function Home() {
                   >
                     <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                   </svg>
-               <div className="my-4 p-4 bg-sky-500/25 text-center w-1/2 rounded-md">
+               <div className="my-2 p-2 bg-sky-500/25 text-center w-1/2 rounded-md">
                <p>情緒語音生成 </p>
                </div>
                <svg
-                    className="w-6 h-6 text-violet-500"
+                    className="w-4 h-4 text-violet-500"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -115,39 +115,64 @@ export default function Home() {
                   >
                     <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                   </svg>
-              <div className="my-4 p-4 bg-sky-500/25 text-center w-1/2 rounded-md">
+              <div className="my-2 p-2 bg-sky-500/25 text-center w-1/2 rounded-md">
               <p>語者轉換</p>
               </div>
-              <Table>
+               <Table>
                 <TableHeader>
                   <TableRow>
                     <TableHead className="w-[75px]"></TableHead>
                     <TableHead>訓練成果</TableHead>
-                    <TableHead>demo</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   <TableRow>
-                    <TableCell className="w-[120px] h-[60px]">無情緒語句</TableCell>
+                    <TableCell className="w-[120px] h-[40px]">無情緒語句</TableCell>
                     <TableCell className="w-[160px] ">無</TableCell>
-                    <TableCell>demo</TableCell>    
                   </TableRow>
                   <TableRow>
-                    <TableCell className="h-[80px]">情緒語音生成</TableCell>
+                    <TableCell className="h-[40px]">sample</TableCell>
+                    <TableCell><div>
+                      <audio
+                        src="public/wav/sample/1.wav"
+                        className="w-full h-9 p-2"
+                        controls
+                       ></audio></div>
+                      </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="h-[40px]">情緒語音生成</TableCell>
                     <TableCell>賦予情緒風格且維持自然度</TableCell>
-                    <TableCell>demo</TableCell>    
                   </TableRow>
                   <TableRow>
-                    <TableCell className="h-[80px]">語者轉換</TableCell>
-                    <TableCell>帶入角色聲音特徵且維持情緒表現與自然度</TableCell>
-                    <TableCell>demo</TableCell>    
+                    <TableCell className="h-[40px]">sample</TableCell>
+                    <TableCell><div>
+                      <audio
+                        src="public/wav/sample/2.wav"
+                        className="w-full h-9 p-2"
+                        controls
+                       ></audio></div>
+                      </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="h-[40px]">語者轉換</TableCell>
+                    <TableCell>帶入角色聲音特徵且維持情緒表現與自然度</TableCell> 
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="h-[40px]">sample</TableCell>
+                    <TableCell><div>
+                      <audio
+                        src="public/wav/sample/3.wav"
+                        className="w-full h-9 p-2"
+                        controls
+                       ></audio></div>
+                      </TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
               <div className="flex flex-col">
-              <h1 className="py-5 text-center text-2xl font-serif leading-relaxed">
+              <h1 className="py-3 text-center text-xl font-serif leading-relaxed">
                   訓練流程分析表
-                  <br />
                 </h1>
                 <p className="font-serif place-content-center py-5">
                   此表可得知經過不同階段處理造成的音訊變化

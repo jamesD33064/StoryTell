@@ -25,6 +25,7 @@ interface SentenceProps {
   snapIndex: number;
   storyLang: string;
   isEmoMode: boolean;
+  isUpload: boolean;
   onSentenceEmotion: (emotion: string, sentenceId: number) => void;
 }
 
@@ -33,6 +34,7 @@ export default function SentenceCarousel({
   snapIndex,
   storyLang,
   isEmoMode,
+  isUpload,
   onSentenceEmotion,
 }: SentenceProps) {
   const sentenceScrollbar = useRef<HTMLDivElement | null>(null);
@@ -68,7 +70,7 @@ export default function SentenceCarousel({
             <span className="flex">
               {isEmoMode ? (
                 <span className="p-2">
-                  <Select onValueChange={(e) => onSentenceEmotion(e, index)}>
+                  <Select onValueChange={(e) => onSentenceEmotion(e, index)} disabled={isUpload}>
                     <SelectTrigger>
                       <SelectValue
                         placeholder={

@@ -10,6 +10,7 @@ interface WavBarProps {
   nowProgress: number;
   totalProgress: number;
   audioSrc: string;
+  isUpload: boolean;
   onAudioProgressIncress: () => void;
   onAudioProgressDecress: () => void;
   onPlayPauseToggle: () => void; // 增加播放/暫停切換的 callback 函數
@@ -21,6 +22,7 @@ export default function Wavbar({
   nowProgress,
   totalProgress,
   audioSrc,
+  isUpload,
   onAudioProgressIncress,
   onAudioProgressDecress,
   onPlayPauseToggle,
@@ -77,7 +79,7 @@ export default function Wavbar({
         <div className="flex items-center w-full">
           <div className="w-full">
             <div className="flex items-center justify-between align-middle mx-auto mb-1">
-              <Toggle onClick={onEmotionToggle}>
+              <Toggle onClick={onEmotionToggle} disabled={isUpload}>
                 <VideoIcon className="h-4 w-4" />
               </Toggle>
               <div className="flex items-center justify-center">

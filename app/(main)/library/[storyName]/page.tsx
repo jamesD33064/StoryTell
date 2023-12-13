@@ -1,9 +1,5 @@
 "use client";
-import React, {
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Wavbar from "@/components/WAVbar/wavbar";
 import SentenceCarousel from "@/components/SentenceCarousel/page";
@@ -22,6 +18,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
   const [storyLength, setStoryLength] = useState<number>(0);
   const [storyName, setStoryName] = useState("");
   const [storyLang, setStoryLang] = useState("J");
+  const [isUpload, setIsUpload] = useState(false);
 
   const [localStoryContent, setLocalStoryContent] = useLocalStorage(
     params.storyName,
@@ -77,6 +74,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
       setLoaded(true);
       const storyData = response.data;
 
+      setIsUpload(storyData.isUpload);
       setStoryName(storyData.storyName);
       setStoryLang(storyData.storyLang);
 
@@ -241,6 +239,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
                 <div className="w-full flex justify-center align-middle">
                   <SpeakerDropdown
                     speakerList={speakerList}
+                    isUpload={isUpload}
                     onSpeakerChange={handleSpeaker}
                   ></SpeakerDropdown>
                 </div>
@@ -256,6 +255,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
                   snapIndex={audioProgress}
                   storyLang={storyLang}
                   isEmoMode={isEmoMode}
+                  isUpload={isUpload}
                   onSentenceEmotion={handleSentenceEmotion}
                 ></SentenceCarousel>
               )}
@@ -267,6 +267,7 @@ export default function Page({ params }: { params: { storyName: string } }) {
           nowProgress={audioProgress}
           totalProgress={storyLength}
           audioSrc={audioSrc}
+          isUpload={isUpload}
           onAudioProgressIncress={handleAudioProgressIncress}
           onAudioProgressDecress={handleAudioProgressDecress}
           onPlayPauseToggle={handlePlayPauseToggle}

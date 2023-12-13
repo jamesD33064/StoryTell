@@ -7,40 +7,51 @@ interface LibraryCardProps {
   id: string;
   storyName: string;
   storyImg: string;
-  showTag: boolean;
+  storyLang: string;
+  isUpload: boolean;
   link: string;
 }
 
 export default function LibraryCard(props: LibraryCardProps) {
   return (
     <>
-      <Link href={props.link}>
-        <div id={props.id} className="rounded-lg overflow-hidden shadow-lg">
-          <div className="w-full h-auto aspect-square overflow-hidden">
-            <img
-              src={props.storyImg}
-              alt=""
-              className="object-cover w-full h-full"
-            />
-          </div>
-          <div className="px-6">
-            <div className="font-bold py-2">{props.storyName}</div>
-          </div>
-          {props.showTag && (
-            <div className="px-6 pt-4 pb-2">
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #小紅帽
-              </span>
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #大野狼
-              </span>
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                #紅色帽T
-              </span>
+      {!props.isUpload ? (
+        <Link href={props.link}>
+          <div id={props.id} className="rounded-lg overflow-hidden shadow-lg">
+            <div className="w-full h-auto aspect-square overflow-hidden">
+              <img
+                src={props.storyImg}
+                alt=""
+                className="object-cover w-full h-full"
+              />
             </div>
-          )}
-        </div>
-      </Link>
+            <div className="px-6 pb-2">
+              <div className="tracking-wider font-bold text-lg pt-2">{props.storyName}</div>
+              <div className="tracking-wider text-sm pb-2">
+                {props.storyLang == "C" ? "中文版" : "日文版"}
+              </div>
+            </div>
+          </div>
+        </Link>
+      ) : (
+        <Link href={props.link}>
+          <div id={props.id} className="rounded-lg overflow-hidden shadow-lg py-2">
+            {/* <div className="w-full h-auto aspect-square overflow-hidden">
+              <img
+                src={props.storyImg}
+                alt=""
+                className="object-cover w-full h-full"
+              />
+            </div> */}
+            <div className="px-6">
+              <div className="tracking-wider font-bold text-lg pt-2">{props.storyName}</div>
+              <div className="tracking-wider text-sm pb-2">
+                {props.storyLang == "C" ? "中文版" : "日文版"}
+              </div>
+            </div>
+          </div>
+        </Link>
+      )}
     </>
   );
 }

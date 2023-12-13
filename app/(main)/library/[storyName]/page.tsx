@@ -3,8 +3,6 @@ import React, {
   useEffect,
   useRef,
   useState,
-  createContext,
-  useContext,
 } from "react";
 import axios from "axios";
 import Wavbar from "@/components/WAVbar/wavbar";

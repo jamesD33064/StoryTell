@@ -4,7 +4,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { Progress } from "@/components/ui/progress";
 import { Toggle } from "@/components/ui/toggle";
 import { EnterIcon, VideoIcon } from "@radix-ui/react-icons";
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 interface WavBarProps {

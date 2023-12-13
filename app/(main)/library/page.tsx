@@ -8,6 +8,8 @@ interface StoryInfo {
   _id: string;
   storyName: string;
   storyImg: string;
+  storyLang: string;
+  isUpload: boolean;
 }
 
 export default function Library() {
@@ -55,7 +57,8 @@ export default function Library() {
                     story.storyImg +
                     ".png"
                   }
-                  showTag={true}
+                  isUpload={story.isUpload}
+                  storyLang={story.storyLang}
                   link={"/library/" + story._id}
                 ></LibraryCard>
               ))}

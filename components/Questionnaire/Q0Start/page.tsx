@@ -1,16 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Button } from "@/components/ui/button";
 import { CardContent, Card } from "@/components/ui/card";
 import Link from "next/link";
 
-interface props {
-  handleStartQuestion: () => void;
-}
-
-export default function Q0Start({ handleStartQuestion }: props) {
+export default function Q0Start() {
   return (
     <>
       <Card className="rounded-lg overflow-hidden shadow-lg max-w-sm mx-auto hover:shadow-xl transition-all duration-200">
@@ -28,16 +23,7 @@ export default function Q0Start({ handleStartQuestion }: props) {
             <br />
             更換說話的人效果調查
           </p>
-          <div className="flex mt-4 space-x-2">
-            <Button
-              className="w-full hover:border-gray-700 hover:text-gray-700 transition-all duration-200"
-              size="sm"
-              variant="outline"
-              onClick={handleStartQuestion}
-            >
-              開始調查！
-            </Button>
-          </div>
+          <div className="flex mt-4 space-x-2"></div>
         </CardContent>
       </Card>
     </>

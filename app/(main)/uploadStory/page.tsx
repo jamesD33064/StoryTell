@@ -73,8 +73,8 @@ export default function UploadStory() {
         }
       );
 
+      setLoaded(false);
       if (response.status === 200) {
-        setLoaded(false);
         toast({
           title: "上傳成功",
           description: values.storyName + "正在排隊生成語音中！",

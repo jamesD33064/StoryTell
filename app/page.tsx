@@ -72,31 +72,6 @@ export default function Home() {
           </div>
 
           {/* snap page2 */}
-          <div className="snap-center h-screen pt-24">
-            <div className="flex flex-col justify-center items-center">
-              {/* <Table>
-                <TableCaption>A list of your recent invoices.</TableCaption>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-[100px]">Invoice</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  <TableRow>
-                    <TableCell className="font-medium">INV001</TableCell>
-                    <TableCell>Paid</TableCell>
-                    <TableCell>Credit Card</TableCell>
-                    <TableCell className="text-right">$250.00</TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table> */}
-            </div>
-          </div>
-
-          {/* snap page3 */}
           <div className="snap-center h-screen flex flex-col justify-center align-middle">
             <div className="w-full">
               <AspectRatio ratio={1 / 1}>
@@ -109,8 +84,106 @@ export default function Home() {
               </AspectRatio>
             </div>
           </div>
+          {/* snap page3 */}
+          <div className="snap-center h-screen pt-4">
+            <div className="flex flex-col justify-center items-center">
+              <div className="my-2 p-2 bg-sky-500/25 text-center w-1/2 rounded-md">
+                <p>情緒分析</p>
+                </div>
+                <svg
+                    className="w-4 h-4 text-violet-500"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="4"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                  </svg>
+               <div className="my-2 p-2 bg-sky-500/25 text-center w-1/2 rounded-md">
+               <p>情緒語音生成 </p>
+               </div>
+               <svg
+                    className="w-4 h-4 text-violet-500"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="4"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                  </svg>
+              <div className="my-2 p-2 bg-sky-500/25 text-center w-1/2 rounded-md">
+              <p>語者轉換</p>
+              </div>
+               <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[75px]"></TableHead>
+                    <TableHead>訓練成果</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="w-[120px] h-[40px]">無情緒語句</TableCell>
+                    <TableCell className="w-[160px] ">無</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="h-[40px]">sample</TableCell>
+                    <TableCell><div>
+                      <audio
+                        src="public/wav/sample/1.wav"
+                        className="w-full h-9 p-2"
+                        controls
+                       ></audio></div>
+                      </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="h-[40px]">情緒語音生成</TableCell>
+                    <TableCell>賦予情緒風格且維持自然度</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="h-[40px]">sample</TableCell>
+                    <TableCell><div>
+                      <audio
+                        src="public/wav/sample/2.wav"
+                        className="w-full h-9 p-2"
+                        controls
+                       ></audio></div>
+                      </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="h-[40px]">語者轉換</TableCell>
+                    <TableCell>帶入角色聲音特徵且維持情緒表現與自然度</TableCell> 
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="h-[40px]">sample</TableCell>
+                    <TableCell><div>
+                      <audio
+                        src="public/wav/sample/3.wav"
+                        className="w-full h-9 p-2"
+                        controls
+                       ></audio></div>
+                      </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+              <div className="flex flex-col">
+              <h1 className="py-3 text-center text-xl font-serif leading-relaxed">
+                  訓練流程分析表
+                </h1>
+                <p className="font-serif place-content-center py-5">
+                  此表可得知經過不同階段處理造成的音訊變化
+                  <br />
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
     </>
   );
 }
+

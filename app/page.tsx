@@ -39,7 +39,7 @@ export default function Home() {
                   <br />
                   語者轉換是基於RVC實現
                   <br />
-                  前端使用NEXTJS 13架設於Vervel
+                  前端使用NEXTJS 13架設於Vercel
                   <br />
                   後端使用LARAVEL及flask建立
                   <br />
@@ -134,7 +134,7 @@ export default function Home() {
                     <TableCell className="h-[40px]">sample</TableCell>
                     <TableCell><div>
                       <audio
-                        src="public/wav/sample/1.wav"
+                        src="/wav/sample/1.wav"
                         className="w-full h-9 p-2"
                         controls
                        ></audio></div>
@@ -148,7 +148,7 @@ export default function Home() {
                     <TableCell className="h-[40px]">sample</TableCell>
                     <TableCell><div>
                       <audio
-                        src="public/wav/sample/2.wav"
+                        src="/wav/sample/2.wav"
                         className="w-full h-9 p-2"
                         controls
                        ></audio></div>
@@ -162,7 +162,7 @@ export default function Home() {
                     <TableCell className="h-[40px]">sample</TableCell>
                     <TableCell><div>
                       <audio
-                        src="public/wav/sample/3.wav"
+                        src="/wav/sample/3.wav"
                         className="w-full h-9 p-2"
                         controls
                        ></audio></div>

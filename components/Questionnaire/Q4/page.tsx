@@ -50,6 +50,10 @@ export default function Q4() {
                   <Label htmlFor={index.toString()}>{speaker}</Label>
                 </div>
               ))}
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="unknow-option" id="unknow-option" />
+                <Label htmlFor="unknow-option">都不認識</Label>
+              </div>
             </RadioGroup>
           </div>
         </CardContent>

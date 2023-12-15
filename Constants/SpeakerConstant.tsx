@@ -13,11 +13,11 @@ export const SpeakerConstant: { [key: string]: string } = {
 };
 
 export const AllChangeSpeakerConstant: string[] = [
-  "子安武人-DIO",
-  "早見沙織-約兒",
-  "高橋李依-星野愛",
-  "小野大輔-空條承太郎",
-  "古川慎-白銀御行",
+  "子安武人-迪奧布蘭度、青雉-jojo、海賊王",
+  "早見沙織-約兒-間諜家家酒",
+  "高橋李依-星野愛-我推的孩子",
+  "小野大輔-空條承太郎-jojo",
+  "古川慎-白銀御行-輝夜姬想讓人告白",
   "珊迪",
   "派大星",
   "秋本麗子",

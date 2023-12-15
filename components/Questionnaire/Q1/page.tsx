@@ -24,7 +24,7 @@ export default function Q1() {
       <Card className="rounded-lg overflow-hidden shadow-lg max-w-sm mx-auto hover:shadow-xl transition-all duration-200">
         <CardContent className="p-4">
           <h2 className="text-2xl font-bold hover:text-gray-700 transition-all duration-200">
-            你覺得下面這段語音像機器合成的嗎？
+            你覺得下面這段語音像機器合成或是真人講的？
           </h2>
           <div className="py-4">
             <audio
@@ -35,10 +35,10 @@ export default function Q1() {
           </div>
           <div className="flex justify-between">
             <h3 className="text-gray-500 text-center hover:text-gray-600 transition-all duration-200">
-              非常不相似
+              機器合成
             </h3>
             <h3 className="text-gray-500 text-center hover:text-gray-600 transition-all duration-200">
-              非常相似
+              真實人聲
             </h3>
           </div>
           <p className="mt-2 text-gray-600 hover:text-gray-700 transition-all duration-200"></p>
